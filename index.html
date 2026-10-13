@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Portfolio of a Senior Product Designer with 10+ years of experience in SaaS, AI, Web3, marketplaces and enterprise platforms.">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Product Design Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Layout concept: left-aligned editorial grid. The one bold move is the design-tool
+   language itself: a Figma-style selection box on the headline and a live
+   "Variables" panel whose modes (Light / Dark / Brand) re-skin a real component. */
+:root {
+  --bg: #F2F4F8;
+  --surface: #FFFFFF;
+  --fg: #10152A;
+  --muted: #566079;
+  --line: #D8DDE8;
+  --accent: #2347F5;
+  --accent-fg: #FFFFFF;
+  --flag: #FF5B3A;
+  --font-display: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0D111F; --surface: #151A2C; --fg: #E9ECF6; --muted: #9AA3BC;
+    --line: #262D45; --accent: #7F95FF; --accent-fg: #0D111F; --flag: #FF7A5C;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0D111F; --surface: #151A2C; --fg: #E9ECF6; --muted: #9AA3BC;
+  --line: #262D45; --accent: #7F95FF; --accent-fg: #0D111F; --flag: #FF7A5C;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  padding-inline: clamp(16px, 4vw, 40px);
+  padding-block: 0 48px;
+  -webkit-font-smoothing: antialiased;
+}
+.wrap { max-width: 1120px; margin-inline: auto; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.08; letter-spacing: -0.02em; text-wrap: balance; margin: 0; }
+p { margin: 0; }
+.mono { font-family: var(--font-mono); }
+.eyebrow {
+  font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--muted);
+}
+
+/* header */
+header.top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 20px; }
+.brand { font-weight: 600; letter-spacing: -0.01em; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.brand i { width: 12px; height: 12px; border-radius: 3px; background: var(--accent); display: inline-block; }
+nav.main { display: flex; align-items: center; gap: 20px; }
+nav.main a.link { text-decoration: none; font-size: 0.9375rem; color: var(--muted); }
+nav.main a.link:hover { color: var(--fg); }
+.theme-btn {
+  font: inherit; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase;
+  background: transparent; color: var(--fg); border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; cursor: pointer;
+}
+.theme-btn:hover { border-color: var(--fg); }
+@media (max-width: 640px) { nav.main a.link { display: none; } }
+
+/* hero */
+.hero { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); align-items: start; padding-block: clamp(32px, 6vw, 72px) clamp(40px, 7vw, 88px); }
+@media (max-width: 880px) { .hero { grid-template-columns: minmax(0, 1fr); } }
+.hero h1 { font-size: clamp(2.5rem, 6.2vw, 4.75rem); font-weight: 700; margin-block: 18px 24px; }
+.sel { position: relative; display: inline-block; padding: 0 0.14em; color: var(--accent); outline: 1.5px solid var(--accent); }
+.sel::before, .sel::after, .sel span.h1, .sel span.h2 {
+  content: ""; position: absolute; width: 9px; height: 9px; background: var(--surface); border: 1.5px solid var(--accent);
+}
+.sel::before { left: -5px; top: -5px; }
+.sel::after { right: -5px; bottom: -5px; }
+.sel span.h1 { right: -5px; top: -5px; }
+.sel span.h2 { left: -5px; bottom: -5px; }
+.sel .tag {
+  position: absolute; left: -1.5px; top: calc(100% + 12px); background: var(--accent); color: var(--accent-fg);
+  font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.02em; font-weight: 500; line-height: 1;
+  padding: 5px 7px; border-radius: 3px; white-space: nowrap; width: auto; height: auto; border: 0;
+}
+.hero .lede { font-size: clamp(1.0625rem, 1.6vw, 1.25rem); color: var(--muted); max-width: 34em; margin-top: 36px; }
+.hero .lede strong { color: var(--fg); font-weight: 600; }
+.cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.btn {
+  font: inherit; font-weight: 600; font-size: 0.9375rem; text-decoration: none; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; border-radius: 8px;
+  background: var(--accent); color: var(--accent-fg); border: 1.5px solid var(--accent);
+}
+.btn:hover { filter: brightness(1.08); }
+.btn.ghost { background: transparent; color: var(--fg); border-color: var(--line); }
+.btn.ghost:hover { border-color: var(--fg); filter: none; }
+.facts { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: 36px; font-family: var(--font-mono); font-size: 0.8125rem; color: var(--muted); }
+.facts b { color: var(--fg); font-weight: 500; }
+
+/* variables panel */
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; min-width: 0; }
+.panel-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 16px; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+.panel-head .eyebrow { color: var(--fg); }
+.modes { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; padding: 2px; gap: 2px; }
+.modes button {
+  font-family: var(--font-mono); font-size: 0.75rem; background: transparent; color: var(--muted);
+  border: 0; border-radius: 6px; padding: 6px 12px; cursor: pointer;
+}
+.modes button[aria-pressed="true"] { background: var(--fg); color: var(--bg); }
+.preview-stage { padding: 20px 16px; background: var(--bg); border-bottom: 1px solid var(--line); }
+.comp {
+  background: var(--p-surface); color: var(--p-text); border-radius: var(--p-radius); padding: 20px;
+  border: 1px solid color-mix(in srgb, var(--p-text) 14%, transparent); transition: background .25s, color .25s, border-radius .25s;
+}
+.comp h3 { font-size: 1.25rem; letter-spacing: -0.01em; }
+.comp p { font-size: 0.9375rem; opacity: .75; margin-top: 6px; }
+.comp .row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.comp .c-btn {
+  font: inherit; font-weight: 600; font-size: 0.875rem; background: var(--p-action); color: var(--p-surface);
+  border: 0; border-radius: calc(var(--p-radius) * .6); padding: 10px 16px; cursor: default; transition: background .25s, border-radius .25s;
+}
+.comp .c-link { align-self: center; font-size: 0.875rem; color: var(--p-action); font-weight: 500; }
+.tokens { list-style: none; margin: 0; padding: 4px 16px 12px; }
+.tokens li { display: grid; grid-template-columns: 18px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 9px 0; border-bottom: 1px dashed var(--line); font-family: var(--font-mono); font-size: 0.8125rem; }
+.tokens li:last-child { border-bottom: 0; }
+.tokens .sw { width: 18px; height: 18px; border-radius: 4px; border: 1px solid var(--line); background: var(--v, transparent); }
+.tokens .sw.r { background: transparent; border-radius: 0; border-width: 0; border-top: 2px solid var(--fg); border-left: 2px solid var(--fg); border-top-left-radius: var(--v); }
+.tokens .val { color: var(--muted); }
+.tokens .name { overflow-wrap: anywhere; }
+
+/* sections */
+section { padding-block: clamp(40px, 7vw, 88px); border-top: 1px solid var(--line); }
+.sec-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 16px clamp(24px, 5vw, 64px); margin-bottom: clamp(28px, 4vw, 48px); }
+@media (max-width: 760px) { .sec-head { grid-template-columns: minmax(0, 1fr); } }
+.sec-head h2 { font-size: clamp(1.75rem, 3.6vw, 2.75rem); font-weight: 700; }
+.sec-head p { color: var(--muted); max-width: 36em; align-self: end; }
+
+/* domains */
+.domains { display: flex; flex-wrap: wrap; gap: 10px 12px; }
+.domains span {
+  font-family: var(--font-display); font-weight: 600; letter-spacing: -0.02em;
+  font-size: clamp(1.5rem, 4.2vw, 3rem); padding: 6px 18px 8px; border: 1.5px solid var(--fg); border-radius: 999px;
+}
+.domains span:hover { background: var(--fg); color: var(--bg); }
+
+/* expertise */
+.groups { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 3vw, 40px); }
+@media (max-width: 900px) { .groups { grid-template-columns: minmax(0, 1fr); } }
+.group h3 { font-size: 1.25rem; padding-bottom: 14px; border-bottom: 2px solid var(--fg); display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.group h3 small { font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 400; }
+.group ul { list-style: none; margin: 0; padding: 0; }
+.group li { padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 1.0625rem; font-weight: 500; }
+.group li span { display: block; font-weight: 400; font-size: 0.9375rem; color: var(--muted); margin-top: 2px; }
+
+/* process */
+.flow { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); overflow: hidden; }
+@media (max-width: 900px) { .flow { grid-template-columns: minmax(0, 1fr); } }
+.flow > div { padding: 22px 22px 26px; border-left: 1px solid var(--line); min-width: 0; }
+.flow > div:first-child { border-left: 0; }
+@media (max-width: 900px) { .flow > div { border-left: 0; border-top: 1px solid var(--line); } .flow > div:first-child { border-top: 0; } }
+.flow .stage { font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent); letter-spacing: 0.06em; text-transform: uppercase; }
+.flow h3 { font-size: 1.25rem; margin-block: 10px 8px; letter-spacing: -0.01em; }
+.flow p { color: var(--muted); font-size: 0.9375rem; }
+.two-col { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(20px, 4vw, 56px); margin-top: clamp(28px, 4vw, 48px); }
+@media (max-width: 760px) { .two-col { grid-template-columns: minmax(0, 1fr); } }
+.two-col h3 { font-size: 1.375rem; margin-bottom: 10px; }
+.two-col p { color: var(--muted); max-width: 34em; }
+.stack { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.stack span { font-family: var(--font-mono); font-size: 0.8125rem; padding: 5px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); }
+
+/* tools */
+.tools { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 960px) { .tools { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .tools { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.tool { border: 1px solid var(--line); background: var(--surface); border-radius: 10px; padding: 18px 16px 16px; display: flex; flex-direction: column; gap: 22px; min-width: 0; }
+.tool b { font-size: 1.125rem; font-weight: 600; letter-spacing: -0.01em; }
+.tool span { font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+
+/* work with me */
+.offers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(16px, 2.5vw, 28px); }
+@media (max-width: 900px) { .offers { grid-template-columns: minmax(0, 1fr); } }
+.offer { padding-top: 18px; border-top: 2px solid var(--fg); }
+.offer h3 { font-size: 1.5rem; margin-bottom: 10px; }
+.offer p { color: var(--muted); font-size: 1rem; }
+.contact { margin-top: clamp(36px, 6vw, 72px); background: var(--fg); color: var(--bg); border-radius: 16px; padding: clamp(24px, 5vw, 56px); display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 28px; align-items: end; }
+@media (max-width: 760px) { .contact { grid-template-columns: minmax(0, 1fr); } }
+.contact h2 { font-size: clamp(1.75rem, 4vw, 3rem); font-weight: 700; }
+.contact p { opacity: .75; margin-top: 12px; max-width: 30em; }
+.mail { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.mail code { font-family: var(--font-mono); font-size: 0.9375rem; padding: 10px 14px; border: 1px solid color-mix(in srgb, var(--bg) 35%, transparent); border-radius: 8px; overflow-wrap: anywhere; user-select: all; }
+.mail button {
+  font: inherit; font-weight: 600; font-size: 0.875rem; cursor: pointer; border: 0; border-radius: 8px;
+  padding: 11px 16px; background: var(--bg); color: var(--fg);
+}
+footer.foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; padding-top: 28px; font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); }
+
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .comp, .comp .c-btn { transition: none; } }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="#top"><i></i>Senior Product Designer</a>
+    <nav class="main" aria-label="Main">
+      <a class="link" href="#expertise">Expertise</a>
+      <a class="link" href="#process">Process</a>
+      <a class="link" href="#tools">Tools</a>
+      <a class="link" href="#contact">Contact</a>
+      <button class="theme-btn" id="themeBtn" type="button" aria-label="Switch colour theme">Theme</button>
+    </nav>
+  </header>
+
+  <main id="top">
+    <div class="hero">
+      <div>
+        <p class="eyebrow">Product design · Web &amp; mobile · 10+ years</p>
+        <h1>Complex ideas, made <span class="sel">simple<span class="h1"></span><span class="h2"></span><span class="tag">Hug × Hug</span></span> and scalable.</h1>
+        <p class="lede">I design complex web and mobile products for SaaS, AI, Web3, marketplaces and enterprise platforms. I balance <strong>user needs</strong>, <strong>business goals</strong> and <strong>technical feasibility</strong> so teams ship products people actually enjoy using.</p>
+        <div class="cta-row">
+          <a class="btn" href="#contact">Start a project</a>
+          <a class="btn ghost" href="#expertise">See what I do</a>
+        </div>
+        <div class="facts">
+          <span><b>10+</b> years</span>
+          <span><b>Figma</b> + AI workflows</span>
+          <span><b>React / Tailwind</b> aware</span>
+        </div>
+      </div>
+
+      <aside class="panel" aria-label="Design tokens demo">
+        <div class="panel-head">
+          <span class="eyebrow">Variables · Product UI</span>
+          <div class="modes" role="group" aria-label="Variable mode">
+            <button type="button" data-mode="light" aria-pressed="true">Light</button>
+            <button type="button" data-mode="dark" aria-pressed="false">Dark</button>
+            <button type="button" data-mode="brand" aria-pressed="false">Brand</button>
+          </div>
+        </div>
+        <div class="preview-stage">
+          <div class="comp" id="comp" style="--p-surface:#FFFFFF;--p-text:#10152A;--p-action:#2347F5;--p-radius:8px">
+            <h3>Invite your team</h3>
+            <p>Add collaborators to this workspace and set what each person can edit.</p>
+            <div class="row"><button class="c-btn" type="button" tabindex="-1">Send invites</button><span class="c-link">Copy invite link</span></div>
+          </div>
+        </div>
+        <ul class="tokens" id="tokens">
+          <li><span class="sw" style="--v:#FFFFFF"></span><span class="name">color/surface</span><span class="val">#FFFFFF</span></li>
+          <li><span class="sw" style="--v:#10152A"></span><span class="name">color/text</span><span class="val">#10152A</span></li>
+          <li><span class="sw" style="--v:#2347F5"></span><span class="name">color/action</span><span class="val">#2347F5</span></li>
+          <li><span class="sw r" style="--v:8px"></span><span class="name">radius/md</span><span class="val">8px</span></li>
+        </ul>
+      </aside>
+    </div>
+
+    <section aria-labelledby="domains-h">
+      <div class="sec-head">
+        <div><p class="eyebrow">Product domains</p></div>
+        <h2 id="domains-h">Where I design</h2>
+      </div>
+      <div class="domains">
+        <span>SaaS</span><span>AI</span><span>Web3</span><span>Marketplaces</span><span>Enterprise platforms</span>
+      </div>
+    </section>
+
+    <section id="expertise" aria-labelledby="exp-h">
+      <div class="sec-head">
+        <div><p class="eyebrow">Expertise</p></div>
+        <h2 id="exp-h">From first sketch to shipped component</h2>
+      </div>
+      <div class="groups">
+        <div class="group">
+          <h3>Product <small>Discover &amp; define</small></h3>
+          <ul>
+            <li>End-to-end Product Design<span>From problem framing to launch</span></li>
+            <li>UX Research &amp; User Flows<span>Understand people, then map the journey</span></li>
+            <li>Wireframing &amp; Interactive Prototypes<span>Test ideas before they are built</span></li>
+          </ul>
+        </div>
+        <div class="group">
+          <h3>Interface <small>Design &amp; refine</small></h3>
+          <ul>
+            <li>UI Design for Web &amp; Mobile<span>Clear, modern, consistent screens</span></li>
+            <li>Responsive Design<span>One product that fits every screen</span></li>
+            <li>Accessibility<span>Interfaces everyone can use</span></li>
+          </ul>
+        </div>
+        <div class="group">
+          <h3>Systems <small>Scale &amp; hand off</small></h3>
+          <ul>
+            <li>Design Systems &amp; Component Libraries<span>Reusable parts that keep teams aligned</span></li>
+            <li>Figma Variables &amp; Design Tokens<span>Themes and modes defined once</span></li>
+            <li>Developer Handoff<span>Specs engineers can build from</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="process" aria-labelledby="proc-h">
+      <div class="sec-head">
+        <div><p class="eyebrow">AI-powered workflow</p></div>
+        <div>
+          <h2 id="proc-h">Faster from requirements to a validated concept</h2>
+        </div>
+      </div>
+      <div class="flow">
+        <div><span class="stage">Stage 1</span><h3>Requirements</h3><p>Goals, constraints and user needs gathered with founders and product managers.</p></div>
+        <div><span class="stage">Stage 2</span><h3>Prototype</h3><p>Figma and Figma Make turn ideas into an interactive prototype quickly.</p></div>
+        <div><span class="stage">Stage 3</span><h3>Validate</h3><p>The concept is tested and refined before engineering time is spent.</p></div>
+        <div><span class="stage">Stage 4</span><h3>Hand off</h3><p>Components, variables and tokens that map cleanly to code.</p></div>
+      </div>
+      <div class="two-col">
+        <div>
+          <h3>I design with the code in mind</h3>
+          <p>I understand front-end development, so the interfaces I design are realistic, scalable and easy to implement. That means fewer surprises in review and faster builds.</p>
+          <div class="stack"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>React</span><span>Tailwind</span></div>
+        </div>
+        <div>
+          <h3>Close to the people building it</h3>
+          <p>I work side by side with founders, product managers and engineers to simplify complex workflows and create experiences users enjoy.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="tools" aria-labelledby="tools-h">
+      <div class="sec-head">
+        <div><p class="eyebrow">Tools</p></div>
+        <h2 id="tools-h">What I work with</h2>
+      </div>
+      <div class="tools">
+        <div class="tool"><span>Design</span><b>Figma</b></div>
+        <div class="tool"><span>Motion</span><b>After Effects</b></div>
+        <div class="tool"><span>Animation</span><b>Lottie</b></div>
+        <div class="tool"><span>Web</span><b>Framer</b></div>
+        <div class="tool"><span>AI build</span><b>Lovable</b></div>
+        <div class="tool"><span>AI coding</span><b>Claude Code</b></div>
+      </div>
+    </section>
+
+    <section id="contact" aria-labelledby="work-h">
+      <div class="sec-head">
+        <div><p class="eyebrow">Work with me</p></div>
+        <h2 id="work-h">Three ways I can help</h2>
+      </div>
+      <div class="offers">
+        <div class="offer"><h3>Design a new product</h3><p>Take an idea from zero to a clean, modern, developer-friendly product.</p></div>
+        <div class="offer"><h3>Improve a SaaS platform</h3><p>Simplify an existing product so users move through complex workflows with less friction.</p></div>
+        <div class="offer"><h3>Build a Design System</h3><p>Create a scalable library of components, variables and tokens your team can build on.</p></div>
+      </div>
+
+      <div class="contact">
+        <div>
+          <h2>Have a product to design?</h2>
+          <p>Tell me what you are building and where it is stuck. I will reply with how I would approach it.</p>
+        </div>
+        <div class="mail">
+          <code id="mailText">your@email.com</code>
+          <button type="button" id="copyBtn">Copy email</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot"><span>Senior Product Designer</span><span>Web · Mobile · SaaS · AI · Web3</span></footer>
+</div>
+
+<script>
+(function () {
+  var root = document.documentElement;
+
+  // theme toggle
+  var themeBtn = document.getElementById('themeBtn');
+  function currentTheme() {
+    var t = root.getAttribute('data-theme');
+    if (t) return t;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+  themeBtn.addEventListener('click', function () {
+    var next = currentTheme() === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('portfolio-theme', next); } catch (e) {}
+  });
+  try {
+    var saved = localStorage.getItem('portfolio-theme');
+    if (saved === 'light' || saved === 'dark') root.setAttribute('data-theme', saved);
+  } catch (e) {}
+
+  // variables panel
+  var modes = {
+    light: { surface: '#FFFFFF', text: '#10152A', action: '#2347F5', radius: '8px' },
+    dark:  { surface: '#151A2C', text: '#E9ECF6', action: '#7F95FF', radius: '8px' },
+    brand: { surface: '#FFF1EC', text: '#3A1208', action: '#FF5B3A', radius: '16px' }
+  };
+  var comp = document.getElementById('comp');
+  var rows = document.querySelectorAll('#tokens li');
+  var buttons = document.querySelectorAll('.modes button');
+  function apply(name) {
+    var m = modes[name];
+    comp.style.setProperty('--p-surface', m.surface);
+    comp.style.setProperty('--p-text', m.text);
+    comp.style.setProperty('--p-action', m.action);
+    comp.style.setProperty('--p-radius', m.radius);
+    var vals = [m.surface, m.text, m.action, m.radius];
+    rows.forEach(function (li, i) {
+      li.querySelector('.val').textContent = vals[i];
+      li.querySelector('.sw').style.setProperty('--v', vals[i]);
+    });
+    buttons.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.mode === name)); });
+  }
+  buttons.forEach(function (b) { b.addEventListener('click', function () { apply(b.dataset.mode); }); });
+
+  // copy email
+  var copyBtn = document.getElementById('copyBtn');
+  var mailText = document.getElementById('mailText');
+  copyBtn.addEventListener('click', function () {
+    var text = mailText.textContent;
+    function done() { copyBtn.textContent = 'Copied'; setTimeout(function () { copyBtn.textContent = 'Copy email'; }, 1600); }
+    function fallback() {
+      var r = document.createRange(); r.selectNodeContents(mailText);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+    }
+    try {
+      navigator.clipboard.writeText(text).then(done, fallback);
+    } catch (e) { fallback(); }
+  });
+})();
+</script>
+</body>
+</html>
