@@ -9,8 +9,8 @@
   --line: rgba(253, 253, 253, 0.14);
   --accent: #AEA8FE;
   --accent-2: #E3C8FF;
-  --font-serif: "Newsreader", Georgia, "Times New Roman", serif;
-  --font-sans: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-serif: "Urbanist", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-sans: "Urbanist", system-ui, -apple-system, "Segoe UI", sans-serif;
   --gutter: clamp(16px, 3vw, 40px);
 }
 
