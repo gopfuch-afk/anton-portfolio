@@ -11,7 +11,7 @@
   --accent-2: #E3C8FF;
   --font-serif: "Urbanist", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-sans: "Urbanist", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --gutter: clamp(16px, 3vw, 40px);
+  --gutter: clamp(16px, 4.5vw, 72px);
 }
 
 * { box-sizing: border-box; }
@@ -135,7 +135,7 @@ footer.foot { padding-top: clamp(48px, 7vw, 96px); padding-bottom: 32px; }
 /* back to top */
 .to-top {
   position: fixed; right: clamp(16px, 2.5vw, 32px); bottom: calc(clamp(16px, 2.5vw, 32px) + env(safe-area-inset-bottom, 0px)); z-index: 20;
-  width: 52px; height: 52px; padding: 0; border: 0; border-radius: 50%; cursor: pointer;
+  width: 44px; height: 44px; padding: 0; border: 0; border-radius: 50%; cursor: pointer;
   display: grid; place-items: center; color: var(--fg);
   background: rgba(24, 27, 31, .8); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
   box-shadow: 0 10px 30px -10px rgba(0, 0, 0, .6);
@@ -143,8 +143,12 @@ footer.foot { padding-top: clamp(48px, 7vw, 96px); padding-bottom: 32px; }
   transition: opacity .3s, transform .3s cubic-bezier(.2, .7, .2, 1), visibility .3s;
 }
 .to-top.is-visible { opacity: 1; visibility: visible; transform: none; }
+/* wide screens: centre the button in the right margin, outside the content grid */
+@media (min-width: 1200px) {
+  .to-top { right: calc((max(var(--gutter), (100% - 1440px) / 2 + var(--gutter)) - 44px) / 2); }
+}
 .to-top > svg { grid-area: 1 / 1; }
-.to-top-ring { width: 52px; height: 52px; transform: rotate(-90deg); }
+.to-top-ring { width: 44px; height: 44px; transform: rotate(-90deg); }
 .to-top-ring circle { fill: none; stroke-width: 2; }
 .to-top-ring .track { stroke: var(--line); }
 .to-top-ring .bar { stroke: var(--accent); stroke-linecap: round; }

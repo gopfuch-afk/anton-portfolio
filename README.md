@@ -18,10 +18,6 @@ Static site. No build step, no dependencies.
 | Lumi AI | `work/lumi-ai.html` | `media/lumi-ai/` |
 | Mava AI | `work/mava-ai.html` | `media/mava-ai/` |
 | Furbnow | `work/furbnow.html` | `media/furbnow/` |
-| Falc AI | `work/falc-ai.html` | `media/falc-ai/` |
-| Unagi / Ultimate Champions | `work/unagi.html` | `media/unagi/` |
-| Aurbitrage | `work/aurbitrage.html` | `media/aurbitrage/` |
-| Trumpet | `work/trumpet.html` | `media/trumpet/` |
 | Muso.AI | `work/muso-ai.html` | `media/muso-ai/` |
 
 ## Adding your content to a case
