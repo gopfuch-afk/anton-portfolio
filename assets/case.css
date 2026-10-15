@@ -92,19 +92,20 @@ ul.ph-text { padding-left: 32px; }
 
 /* key numbers */
 .stats h2 { font-size: clamp(1.75rem, 3vw, 2.5rem); line-height: 1.1; letter-spacing: -0.02em; margin-bottom: clamp(24px, 3vw, 40px); }
-/* columns: 5 on wide screens, 2 on tablets, 1 on phones; dividers follow the column count */
+/* 5 in a row on wide screens; 3 + 2 on tablets (6-track grid); 1 per row on phones.
+   A cell gets a left divider only when it is not the first in its row. */
 .stats-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border-block: 1px solid var(--line); }
 .stat { padding: clamp(24px, 3vw, 36px) clamp(16px, 1.6vw, 24px); border-left: 1px solid var(--line); min-width: 0; }
 .stat:first-child { border-left: 0; padding-left: 0; }
 @media (max-width: 1100px) {
-  .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .stat:first-child { padding-left: clamp(16px, 1.6vw, 24px); }
-  .stat:nth-child(odd) { border-left: 0; padding-left: 0; }
-  .stat:nth-child(n+3) { border-top: 1px solid var(--line); }
+  .stats-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .stat:nth-child(-n+3) { grid-column: span 2; }
+  .stat:nth-child(n+4) { grid-column: span 3; border-top: 1px solid var(--line); }
+  .stat:nth-child(4) { border-left: 0; padding-left: 0; }
 }
-@media (max-width: 600px) {
+@media (max-width: 640px) {
   .stats-grid { grid-template-columns: minmax(0, 1fr); }
-  .stat { border-left: 0; padding-left: 0; }
+  .stat, .stat:nth-child(n) { grid-column: auto; border-left: 0; padding-left: 0; padding-right: 0; }
   .stat:nth-child(n+2) { border-top: 1px solid var(--line); }
 }
 .stat .label { display: block; margin-bottom: 18px; }
@@ -118,13 +119,13 @@ ul.ph-text { padding-left: 32px; }
 
 /* link to the live product at the end of a case */
 .case-link {
-  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px;
-  padding-block: 28px; border-block: 1px solid var(--line);
+  display: flex; flex-direction: column; align-items: center; gap: 20px; text-align: center;
+  padding-block: clamp(16px, 3vw, 40px);
 }
 .case-link p { font-family: var(--font-serif); font-weight: 300; font-size: clamp(1.4rem, 2.4vw, 2rem); letter-spacing: -0.02em; }
 
 /* next project */
-.next-wrap { border-top: 1px solid var(--line); padding-block: clamp(56px, 8vw, 112px); }
+.next-wrap { padding-block: clamp(56px, 8vw, 112px); }
 .next {
   display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 64px);
   align-items: end; text-decoration: none; margin-top: 20px;
