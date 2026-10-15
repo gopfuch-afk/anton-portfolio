@@ -75,7 +75,7 @@ ul.ph-text { padding-left: 32px; }
 .play {
   position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 2;
   display: inline-flex; align-items: center; gap: 10px; height: 52px; padding: 0 22px 0 18px;
-  border: 0; border-radius: 999px; background: var(--fg); color: #000; cursor: pointer;
+  border: 0; border-radius: 999px; background: var(--fg); color: var(--bg); cursor: pointer;
   font: 500 15px/1 var(--font-sans); box-shadow: 0 12px 32px -12px rgba(0, 0, 0, .6); transition: background .2s;
 }
 .frame.no-poster .play { top: auto; bottom: 28px; transform: translateX(-50%); }

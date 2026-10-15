@@ -7,6 +7,9 @@
   // Each star has a depth z (0 far … 1 near): near stars are bigger, brighter,
   // drift faster and shift more with the cursor and with scrolling (parallax).
   var stars = [];
+  var starRGB = '253,253,253';
+  function readStar() { starRGB = getComputedStyle(document.documentElement).getPropertyValue('--star-rgb').trim() || starRGB; }
+  readStar();
   var W = 0, H = 0;
   var mouse = { x: 0, y: 0 }, ease = { x: 0, y: 0 };
   var last = 0;
@@ -49,7 +52,7 @@
       var py = st.y + ease.y * st.z * 24 - scroll * st.z * 0.15;
       py = ((py % (H + pad * 2)) + H + pad * 2) % (H + pad * 2) - pad;
       var a = reduce ? st.a : st.a * (0.6 + 0.4 * Math.sin(t * st.s + st.p));
-      ctx.fillStyle = 'rgba(253,253,253,' + a.toFixed(3) + ')';
+      ctx.fillStyle = 'rgba(' + starRGB + ',' + a.toFixed(3) + ')';
       ctx.beginPath(); ctx.arc(px, py, st.r, 0, 6.283); ctx.fill();
     }
     if (!reduce) requestAnimationFrame(draw);
@@ -63,6 +66,32 @@
       mouse.y = (e.clientY / H - 0.5) * 2;
     }, { passive: true });
   }
+
+  // theme toggle: dark (default) / light, remembered in localStorage
+  (function () {
+    var nav = document.querySelector('nav.main');
+    if (!nav) return;
+    var root = document.documentElement;
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'theme-toggle';
+    btn.innerHTML = '<svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7.25" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 2.75a7.25 7.25 0 0 1 0 14.5z" fill="currentColor"/></svg>';
+    function sync() {
+      var light = root.getAttribute('data-theme') === 'light';
+      btn.setAttribute('aria-label', light ? 'Switch to dark theme' : 'Switch to light theme');
+      btn.setAttribute('aria-pressed', String(light));
+    }
+    btn.addEventListener('click', function () {
+      var light = root.getAttribute('data-theme') !== 'light';
+      if (light) root.setAttribute('data-theme', 'light'); else root.removeAttribute('data-theme');
+      try { localStorage.setItem('theme', light ? 'light' : 'dark'); } catch (e) {}
+      sync();
+      readStar();
+      if (reduce) draw(0);
+    });
+    nav.insertBefore(btn, nav.querySelector('.pill'));
+    sync();
+  })();
 
   // back to top: round button whose ring fills with scroll progress
   (function () {
