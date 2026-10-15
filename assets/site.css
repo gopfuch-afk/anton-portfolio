@@ -137,6 +137,8 @@ nav.main a.link::after, .foot-link::after {
 }
 nav.main a.link:hover::after, nav.main a.link:focus-visible::after,
 .foot-link:hover::after, .foot-link:focus-visible::after { transform: scaleX(1); }
+nav.main a.link[aria-current="page"] { color: var(--fg); }
+nav.main a.link[aria-current="page"]::after { transform: scaleX(1); }
 .socials { display: flex; flex-wrap: wrap; gap: 8px; }
 .socials a {
   display: inline-flex; align-items: center; gap: 6px; height: 30px; padding: 0 12px; border-radius: 999px;

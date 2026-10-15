@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/work.css">
 <style>
 /* hero */
 .hero { padding-block: clamp(32px, 6vw, 72px) clamp(56px, 8vw, 120px); }
@@ -24,55 +25,6 @@
 @media (max-width: 860px) { .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .facts .label { display: block; margin-bottom: 6px; }
 .facts p { font-size: 15px; max-width: 18em; }
-
-/* selected work */
-.works { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 clamp(16px, 2.2vw, 32px); }
-.works .col { display: flex; flex-direction: column; gap: clamp(48px, 7vw, 120px); min-width: 0; }
-.works .col:nth-child(2) { padding-top: clamp(80px, 14vw, 220px); }
-@media (max-width: 760px) {
-  /* one column: interleave both columns so cases keep their list order */
-  .works { display: flex; flex-direction: column; gap: 56px; }
-  .works .col { display: contents; }
-  .works .col:nth-child(1) .work:nth-child(1) { order: 1; }
-  .works .col:nth-child(2) .work:nth-child(1) { order: 2; }
-  .works .col:nth-child(1) .work:nth-child(2) { order: 3; }
-  .works .col:nth-child(2) .work:nth-child(2) { order: 4; }
-  .works .col:nth-child(1) .work:nth-child(3) { order: 5; }
-  .works .col:nth-child(2) .work:nth-child(3) { order: 6; }
-  .works .col:nth-child(1) .work:nth-child(4) { order: 7; }
-  .works .col:nth-child(2) .work:nth-child(4) { order: 8; }
-}
-.work { text-decoration: none; display: block; }
-.work .media {
-  position: relative; aspect-ratio: 16 / 9; border-radius: 4px; overflow: hidden;
-  display: grid; place-items: center; background: var(--g);
-}
-.work .media .mock, .work .media img { transition: transform .6s cubic-bezier(.2, .7, .2, 1); }
-.work .media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.work:hover .media img { transform: scale(1.04); }
-.work:hover .media .mock { transform: scale(1.04); }
-.work .meta { display: flex; justify-content: space-between; gap: 16px; align-items: baseline; margin-top: 20px; font-size: 15px; }
-.work .meta b { font-weight: 500; font-size: clamp(1.375rem, 2vw, 1.75rem); line-height: 1.15; letter-spacing: -0.02em; }
-.work .meta span { color: var(--muted); font-size: 13px; white-space: nowrap; }
-.work p { color: var(--muted); max-width: 30em; margin-top: 4px; }
-
-/* CSS-drawn interface mocks */
-.mock { width: 60%; max-height: 84%; overflow: hidden; background: #0F1115; border-radius: 10px; padding: 14px; box-shadow: 0 30px 60px -20px rgba(0, 0, 0, .55); border: 1px solid rgba(255, 255, 255, .08); }
-.mock.light { background: #FFFFFF; border-color: rgba(0, 0, 0, .06); }
-.mock .bar { height: 8px; border-radius: 4px; background: rgba(255, 255, 255, .14); margin-bottom: 8px; }
-.mock.light .bar { background: rgba(16, 21, 42, .12); }
-.mock .bar.w40 { width: 40%; } .mock .bar.w60 { width: 60%; } .mock .bar.w80 { width: 80%; }
-.mock .bar.hi { background: var(--mk, #AEA8FE); }
-.mock .row { display: flex; gap: 8px; margin-top: 10px; }
-.mock .tile { flex: 1; height: 48px; border-radius: 6px; background: rgba(255, 255, 255, .06); }
-.mock.light .tile { background: rgba(16, 21, 42, .05); }
-.mock .tile.hi { background: var(--mk, #AEA8FE); opacity: .9; }
-.mock .chart { height: 70px; margin-top: 10px; border-radius: 6px; background:
-  linear-gradient(to top, color-mix(in srgb, var(--mk, #AEA8FE) 35%, transparent), transparent),
-  rgba(255, 255, 255, .04);
-  clip-path: polygon(0 80%, 12% 62%, 25% 70%, 38% 40%, 52% 52%, 66% 24%, 80% 34%, 100% 8%, 100% 100%, 0 100%); }
-.mock .chip { display: inline-block; height: 18px; width: 52px; border-radius: 999px; background: var(--mk, #AEA8FE); margin-top: 10px; }
-.mock.phone { width: auto; height: 84%; aspect-ratio: 9 / 18; border-radius: 22px; padding: 18px 12px; }
 
 /* kind words */
 .q-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px 48px; margin-bottom: clamp(32px, 4vw, 56px); }
@@ -133,7 +85,6 @@ a.q-tag:hover { color: var(--fg); border-color: var(--accent); }
   .quote, .quote::before { transition: none; }
   .quote:hover { transform: none; }
   .see-all svg { transition: none; }
-  .work .media .mock, .work .media img { transition: none; }
 }
 </style>
 </head>
@@ -146,8 +97,8 @@ a.q-tag:hover { color: var(--fg); border-color: var(--accent); }
       <a class="id" href="#top" aria-label="Anton Shmatko — home"><span class="logo-ph">Logo</span></a>
       <span class="top-tagline">Senior Product Designer · Web · Mobile · SaaS · AI · Web3</span>
       <nav class="main" aria-label="Main">
-        <a class="link" href="#work">Work</a>
-        <a class="link" href="#kind-words">Kind words</a>
+        <a class="link" href="work/index.html">Work</a>
+        <a class="link" href="about.html">About</a>
         <a class="pill" href="#contact">Get in touch</a>
       </nav>
     </div>

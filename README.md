@@ -5,10 +5,13 @@ Static site. No build step, no dependencies.
 ## Files
 
 - `index.html` — home page (hero, Selected work cards, Kind words testimonials)
+- `work/index.html` — Work page with all case studies (served at `/work`)
+- `about.html` — About page (served at `/about`)
 - `privacy.html` — Privacy Policy, linked from every footer (served at `/privacy`)
 - `work/<project>.html` — one page per case study
 - `work/_template.html` — blank case page to copy for a new project (not linked anywhere, `noindex`)
 - `assets/site.css`, `assets/site.js` — shared styles and behaviour (header, footer, starfield, reveal)
+- `assets/work.css` — case study cards used on the home and Work pages
 - `assets/case.css` — case page layout, placeholders, video controls
 - `assets/media.js` — case page image placeholders and optional MP4 video support
 - `media/<project>/` — images for each case
@@ -74,7 +77,7 @@ Host long videos externally (e.g. Vercel Blob, Cloudflare R2): GitHub rejects fi
 1. Copy `work/_template.html` to `work/<new-slug>.html` and fill it in.
 2. Remove the `<meta name="robots" content="noindex">` line from the copy.
 3. Create `media/<new-slug>/` for its files.
-4. Add a card to `index.html` (`<a class="work reveal" href="work/<new-slug>.html">`).
+4. Add a card to `index.html` and to `work/index.html` (`<a class="work reveal" href="…/work/<new-slug>.html">`).
 5. Update the "Next project" block on the case before it so the chain stays connected.
 
 ## Deploy to Vercel
