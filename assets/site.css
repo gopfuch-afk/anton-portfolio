@@ -75,8 +75,14 @@ nav.main a.link:hover { color: var(--fg); }
 }
 .pill:hover { background: var(--accent); }
 .pill svg { width: 14px; height: 14px; }
+/* phones: keep Work and About visible, tighten spacing */
 @media (max-width: 760px) {
-  nav.main a.link { display: none; }
+  nav.main { gap: 18px; }
+  nav.main .pill { height: 34px; padding: 0 14px; font-size: 14px; }
+}
+@media (max-width: 360px) {
+  nav.main { gap: 14px; }
+  nav.main .pill { padding: 0 12px; font-size: 13px; }
 }
 
 /* sections */
