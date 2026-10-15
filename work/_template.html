@@ -19,8 +19,7 @@
 <!--
   CASE TEMPLATE — copy this file to work/<project-slug>.html for a new case, then add a card in index.html and update the "Next project" links.
   Text:   replace every element with class="ph-text" with your own copy, then remove that class.
-  Media:  put files in media/project-slug/ using the file names below; placeholders disappear once a file exists.
-  Video:  data-src accepts a site file (../media/...) or an external https:// link to an .mp4.
+  Media:  images are media/project-slug/01.jpg, 02.jpg … (01 is the cover); placeholders disappear once a file exists.
 -->
 <div class="page">
   <header class="top">
@@ -50,7 +49,7 @@
 
       <figure class="case-cover">
         <div class="frame" style="--ratio: 16 / 9" data-hint="Cover image · 2400×1350 · JPG or WebP">
-          <img src="../media/project-slug/cover.jpg" alt="Project name — product overview" fetchpriority="high">
+          <img src="../media/project-slug/01.jpg" alt="Project name — product overview" fetchpriority="high">
         </div>
       </figure>
     </div>
@@ -78,9 +77,9 @@
 
       <div class="gallery">
         <figure class="full">
-          <div class="frame video" data-mode="preview" style="--ratio: 16 / 9" aria-label="Project name product preview"
-               data-src="../media/project-slug/preview.mp4" data-poster="../media/project-slug/preview-poster.jpg"
-               data-hint="Short muted loop · 5–15 s · 1920×1080 MP4 (H.264), ideally under 8 MB"></div>
+          <div class="frame" style="--ratio: 16 / 9" data-hint="2400×1350 · JPG, PNG or WebP">
+            <img src="../media/project-slug/02.jpg" alt="Project name — screen 2" loading="lazy">
+          </div>
         </figure>
       </div>
 
@@ -94,17 +93,17 @@
       <div class="gallery">
         <figure class="full">
           <div class="frame" style="--ratio: 16 / 9" data-hint="Key screen · 2400×1350">
-            <img src="../media/project-slug/screen-1.jpg" alt="Project name — key screen" loading="lazy">
+            <img src="../media/project-slug/03.jpg" alt="Project name — key screen" loading="lazy">
           </div>
         </figure>
         <figure>
           <div class="frame" style="--ratio: 4 / 3" data-hint="Detail · 1600×1200">
-            <img src="../media/project-slug/screen-2.jpg" alt="Project name — interface detail" loading="lazy">
+            <img src="../media/project-slug/04.jpg" alt="Project name — interface detail" loading="lazy">
           </div>
         </figure>
         <figure>
           <div class="frame" style="--ratio: 4 / 3" data-hint="Detail · 1600×1200">
-            <img src="../media/project-slug/screen-3.jpg" alt="Project name — interface detail" loading="lazy">
+            <img src="../media/project-slug/05.jpg" alt="Project name — interface detail" loading="lazy">
           </div>
         </figure>
       </div>
@@ -118,10 +117,9 @@
 
       <div class="gallery">
         <figure class="full">
-          <div class="frame video" data-mode="full" style="--ratio: 16 / 9" aria-label="Project name product demo"
-               data-src="../media/project-slug/demo.mp4" data-poster="../media/project-slug/demo-poster.jpg"
-               data-hint="Full walkthrough with sound · 1920×1080 MP4 (H.264) · large files: use an external https:// link"></div>
-          <figcaption class="ph-text">Placeholder — one line about what the demo shows.</figcaption>
+          <div class="frame" style="--ratio: 16 / 9" data-hint="2400×1350 · JPG, PNG or WebP">
+            <img src="../media/project-slug/06.jpg" alt="Project name — screen 6" loading="lazy">
+          </div>
         </figure>
       </div>
 
@@ -135,12 +133,12 @@
       <div class="gallery">
         <figure>
           <div class="frame" style="--ratio: 4 / 3" data-hint="Final screen · 1600×1200">
-            <img src="../media/project-slug/screen-4.jpg" alt="Project name — final design" loading="lazy">
+            <img src="../media/project-slug/07.jpg" alt="Project name — final design" loading="lazy">
           </div>
         </figure>
         <figure>
           <div class="frame" style="--ratio: 4 / 3" data-hint="Final screen · 1600×1200">
-            <img src="../media/project-slug/screen-5.jpg" alt="Project name — final design" loading="lazy">
+            <img src="../media/project-slug/08.jpg" alt="Project name — final design" loading="lazy">
           </div>
         </figure>
       </div>
@@ -155,7 +153,7 @@
             <p>An AI-powered customer support platform that brings conversations into one workspace, helping teams automate common questions and manage support across multiple channels.</p>
           </div>
           <div class="frame" data-ph="off" style="--ratio: 16 / 9; --g: linear-gradient(140deg, #4C1D95, #7C3AED 55%, #E3C8FF)">
-            <img src="../media/mava-ai/cover.jpg" alt="" loading="lazy">
+            <img src="../media/mava-ai/01.jpg" alt="" loading="lazy">
           </div>
         </a>
         <a class="label back" href="../index.html#work"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true" width="14" height="14"><path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.5"/></svg>All work</a>

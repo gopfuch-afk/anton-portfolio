@@ -9,8 +9,8 @@ Static site. No build step, no dependencies.
 - `work/_template.html` — blank case page to copy for a new project (not linked anywhere, `noindex`)
 - `assets/site.css`, `assets/site.js` — shared styles and behaviour (header, footer, starfield, reveal)
 - `assets/case.css` — case page layout, placeholders, video controls
-- `assets/media.js` — images and MP4 videos on case pages (lazy loading, placeholders)
-- `media/<project>/` — images and videos for each case
+- `assets/media.js` — case page image placeholders and optional MP4 video support
+- `media/<project>/` — images for each case
 - `vercel.json` — `cleanUrls`, so `work/lumi-ai.html` is served at `/work/lumi-ai`
 
 | Project | Page | Media folder |
@@ -34,46 +34,43 @@ page as a dashed lilac box. Replace the text and delete `class="ph-text"` from t
 - Hero: My role, Scope, Platform, Year (`<dl class="case-meta">`)
 - Sections: Overview, My role, Challenge, Approach, Outcome — each is a `<div class="case-text">`;
   add more `<p>` paragraphs inside `<div class="body">` as needed
-- Caption under the demo video (`<figcaption>`)
+### Images
 
-### Images and videos
-
-Drop files into `media/<project>/` with these names. A placeholder shows the exact expected path until
+Drop files into `media/<project>/` named by number. A placeholder shows the exact expected path until
 the file exists; nothing in the HTML has to change.
 
-| File | Where it appears | Recommended |
-| --- | --- | --- |
-| `cover.jpg` | Hero image, and the "Next project" card on the previous case | 2400×1350 |
-| `preview.mp4` | Muted looping preview after "My role" | 5–15 s, 1920×1080, H.264, ideally < 8 MB |
-| `preview-poster.jpg` | Still frame shown before the preview loads | First frame of the video |
-| `screen-1.jpg` | Full-width image after "Challenge" | 2400×1350 |
-| `screen-2.jpg`, `screen-3.jpg` | Two images side by side | 1600×1200 |
-| `demo.mp4` | Full demo with sound and controls after "Approach" | 1920×1080, H.264 |
-| `demo-poster.jpg` | Cover shown on the demo before Play | First frame of the video |
-| `screen-4.jpg`, `screen-5.jpg` | Two images after "Outcome" | 1600×1200 |
+| File | Where it appears |
+| --- | --- |
+| `01.jpg` | Cover under the title, and the "Next project" card on the previous case |
+| `02.jpg` | Full width after "My role" |
+| `03.jpg` | Full width after "Challenge" |
+| `04.jpg`, `05.jpg` | Side by side after it |
+| `06.jpg` | Full width after "Approach" |
+| `07.jpg`, `08.jpg` | Side by side after "Outcome" |
 
-Other formats (`.png`, `.webp`) work too — change the extension in the `src` / `data-poster` attribute.
+Lumi AI uses its own layout with 15 images (`01.jpg` … `15.jpg`); see `work/lumi-ai.html`.
+
+Recommended size: 2400×1350 for full-width images, 1600×900 or larger for side-by-side ones.
+Other formats (`.png`, `.webp`) work too — change the extension in the `src` attribute.
 To change the crop of a block, edit its `--ratio` (e.g. `style="--ratio: 4 / 3"`). Add `contain` to the
 frame's class (`class="frame contain"`) to show the whole image without cropping.
 
-### Videos from an external URL
+### Video (optional)
 
-Put a direct `https://` link to an `.mp4` file in `data-src` (and optionally `data-poster`):
+Case pages no longer include video blocks, but `assets/media.js` still supports MP4 from a site file or
+an external `https://` URL. To add one, put this inside a `<div class="gallery">`:
 
 ```html
-<div class="frame video" data-mode="full" data-src="https://cdn.example.com/lumi-demo.mp4"
-     data-poster="../media/lumi-ai/demo-poster.jpg" style="--ratio: 16 / 9"></div>
+<figure class="full">
+  <div class="frame video" data-mode="full" style="--ratio: 16 / 9"
+       data-src="https://cdn.example.com/demo.mp4" data-poster="../media/lumi-ai/demo-poster.jpg"></div>
+</figure>
 ```
 
-Use external hosting (e.g. Vercel Blob, Cloudflare R2, Bunny) for long demos: GitHub rejects files over
-100 MB and large videos slow down every clone and deploy.
+- `data-mode="preview"` — loads when scrolled near, plays muted in a loop, pauses off screen.
+- `data-mode="full"` — loads nothing until the visitor presses **Play demo**, then plays with sound and controls.
 
-### How videos load
-
-- `data-mode="preview"` — downloads only when scrolled near, plays muted in a loop, pauses off screen,
-  has a small pause button. With "reduce motion" enabled it waits for a click.
-- `data-mode="full"` — downloads nothing until the visitor presses **Play demo**, then plays with sound
-  and the browser's native controls.
+Host long videos externally (e.g. Vercel Blob, Cloudflare R2): GitHub rejects files over 100 MB.
 
 ## Adding a new case
 
