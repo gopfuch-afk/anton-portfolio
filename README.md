@@ -5,6 +5,7 @@ Static site. No build step, no dependencies.
 ## Files
 
 - `index.html` — home page (hero, Selected work cards, Kind words testimonials)
+- `privacy.html` — Privacy Policy, linked from every footer (served at `/privacy`)
 - `work/<project>.html` — one page per case study
 - `work/_template.html` — blank case page to copy for a new project (not linked anywhere, `noindex`)
 - `assets/site.css`, `assets/site.js` — shared styles and behaviour (header, footer, starfield, reveal)
