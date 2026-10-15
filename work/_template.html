@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Project name — Case study — Anton Shmatko</title>
+<meta name="description" content="Short description of the product in one or two sentences.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/case.css">
+<script src="../assets/media.js"></script>
+</head>
+<body>
+<canvas id="stars" aria-hidden="true"></canvas>
+
+<!--
+  CASE TEMPLATE — copy this file to work/<project-slug>.html for a new case, then add a card in index.html and update the "Next project" links.
+  Text:   replace every element with class="ph-text" with your own copy, then remove that class.
+  Media:  put files in media/project-slug/ using the file names below; placeholders disappear once a file exists.
+  Video:  data-src accepts a site file (../media/...) or an external https:// link to an .mp4.
+-->
+<div class="page">
+  <header class="top">
+    <div class="wrap">
+      <a class="id" href="../index.html"><b>Anton Shmatko</b><span>Senior Product Designer</span></a>
+      <nav class="main" aria-label="Main">
+        <a class="link" href="../index.html#work">Work</a>
+        <a class="link" href="../index.html#kind-words">Kind words</a>
+        <a class="pill" href="#contact">Get in touch</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap case-hero">
+      <a class="label back" href="../index.html#work"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true" width="14" height="14"><path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.5"/></svg>All work</a>
+      <span class="label eyebrow">Case study · Domain</span>
+      <h1>Project name</h1>
+      <p class="lede">Short description of the product in one or two sentences.</p>
+
+      <dl class="case-meta">
+        <div><dt class="label">My role</dt><dd><span class="ph-text">e.g. Lead Product Designer</span></dd></div>
+        <div><dt class="label">Scope</dt><dd><span class="ph-text">e.g. UX/UI, Design system</span></dd></div>
+        <div><dt class="label">Platform</dt><dd><span class="ph-text">e.g. Web app, iOS</span></dd></div>
+        <div><dt class="label">Year</dt><dd><span class="ph-text">e.g. 2025</span></dd></div>
+      </dl>
+
+      <figure class="case-cover">
+        <div class="frame" style="--ratio: 16 / 9" data-hint="Cover image · 2400×1350 · JPG or WebP">
+          <img src="../media/project-slug/cover.jpg" alt="Project name — product overview" fetchpriority="high">
+        </div>
+      </figure>
+    </div>
+
+    <div class="wrap case-body">
+      <div class="case-text reveal">
+        <h2>Overview</h2>
+        <div class="body">
+          <p>Short description of the product in one or two sentences.</p>
+          <p class="ph-text">Placeholder — 1–2 paragraphs: who the product is for, the business context and what the project set out to achieve.</p>
+        </div>
+      </div>
+
+      <div class="case-text reveal">
+        <h2>My role</h2>
+        <div class="body">
+          <p class="ph-text">Placeholder — your position, the team you worked with (e.g. founders, PM, engineers), project length and what you owned.</p>
+          <ul class="ph-text">
+            <li>Placeholder — responsibility, e.g. end-to-end UX/UI for the core product</li>
+            <li>Placeholder — responsibility, e.g. design system and Figma variables</li>
+            <li>Placeholder — responsibility, e.g. prototyping and developer handoff</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="gallery">
+        <figure class="full">
+          <div class="frame video" data-mode="preview" style="--ratio: 16 / 9" aria-label="Project name product preview"
+               data-src="../media/project-slug/preview.mp4" data-poster="../media/project-slug/preview-poster.jpg"
+               data-hint="Short muted loop · 5–15 s · 1920×1080 MP4 (H.264), ideally under 8 MB"></div>
+        </figure>
+      </div>
+
+      <div class="case-text reveal">
+        <h2>Challenge</h2>
+        <div class="body">
+          <p class="ph-text">Placeholder — the problem: what was hard for users or the business, and which constraints (technical, time, data) shaped the work.</p>
+        </div>
+      </div>
+
+      <div class="gallery">
+        <figure class="full">
+          <div class="frame" style="--ratio: 16 / 9" data-hint="Key screen · 2400×1350">
+            <img src="../media/project-slug/screen-1.jpg" alt="Project name — key screen" loading="lazy">
+          </div>
+        </figure>
+        <figure>
+          <div class="frame" style="--ratio: 4 / 3" data-hint="Detail · 1600×1200">
+            <img src="../media/project-slug/screen-2.jpg" alt="Project name — interface detail" loading="lazy">
+          </div>
+        </figure>
+        <figure>
+          <div class="frame" style="--ratio: 4 / 3" data-hint="Detail · 1600×1200">
+            <img src="../media/project-slug/screen-3.jpg" alt="Project name — interface detail" loading="lazy">
+          </div>
+        </figure>
+      </div>
+
+      <div class="case-text reveal">
+        <h2>Approach</h2>
+        <div class="body">
+          <p class="ph-text">Placeholder — how you worked: research, flows, key design decisions, collaboration with the team and how ideas were validated.</p>
+        </div>
+      </div>
+
+      <div class="gallery">
+        <figure class="full">
+          <div class="frame video" data-mode="full" style="--ratio: 16 / 9" aria-label="Project name product demo"
+               data-src="../media/project-slug/demo.mp4" data-poster="../media/project-slug/demo-poster.jpg"
+               data-hint="Full walkthrough with sound · 1920×1080 MP4 (H.264) · large files: use an external https:// link"></div>
+          <figcaption class="ph-text">Placeholder — one line about what the demo shows.</figcaption>
+        </figure>
+      </div>
+
+      <div class="case-text reveal">
+        <h2>Outcome</h2>
+        <div class="body">
+          <p class="ph-text">Placeholder — results: what shipped, metrics or feedback, and what changed for users and the business.</p>
+        </div>
+      </div>
+
+      <div class="gallery">
+        <figure>
+          <div class="frame" style="--ratio: 4 / 3" data-hint="Final screen · 1600×1200">
+            <img src="../media/project-slug/screen-4.jpg" alt="Project name — final design" loading="lazy">
+          </div>
+        </figure>
+        <figure>
+          <div class="frame" style="--ratio: 4 / 3" data-hint="Final screen · 1600×1200">
+            <img src="../media/project-slug/screen-5.jpg" alt="Project name — final design" loading="lazy">
+          </div>
+        </figure>
+      </div>
+    </div>
+
+    <section class="next-wrap" aria-label="Next project">
+      <div class="wrap">
+        <span class="label">Next project</span>
+        <a class="next" href="mava-ai.html">
+          <div>
+            <h2>Mava AI <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg></h2>
+            <p>An AI-powered customer support platform that brings conversations into one workspace, helping teams automate common questions and manage support across multiple channels.</p>
+          </div>
+          <div class="frame" data-ph="off" style="--ratio: 16 / 9; --g: linear-gradient(140deg, #4C1D95, #7C3AED 55%, #E3C8FF)">
+            <img src="../media/mava-ai/cover.jpg" alt="" loading="lazy">
+          </div>
+        </a>
+        <a class="label back" href="../index.html#work"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true" width="14" height="14"><path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.5"/></svg>All work</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot" id="contact">
+    <div class="wrap">
+      <span class="label">Let’s work together</span>
+      <a class="foot-cta" href="mailto:antonshmatko.designs@gmail.com">
+        <span class="foot-title">Let’s talk about<br>what comes <span class="accent">next</span>.</span>
+        <svg class="foot-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg>
+      </a>
+      <button class="foot-mail" type="button" data-copy="antonshmatko.designs@gmail.com" aria-label="Copy email address antonshmatko.designs@gmail.com">
+        <span>antonshmatko.designs@gmail.com</span>
+        <span class="foot-mail-hint" aria-hidden="true">Click to copy</span>
+      </button>
+      <span class="sr-only" role="status" id="copyStatus"></span>
+      <div class="foot-bottom">
+        <span>Designed and built by Anton Shmatko</span>
+        <span>Senior Product Designer · Web · Mobile · SaaS · AI · Web3</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script src="../assets/site.js"></script>
+</body>
+</html>
