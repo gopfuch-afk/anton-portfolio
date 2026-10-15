@@ -12,28 +12,18 @@
 <style>
 /* hero */
 .hero { padding-block: clamp(32px, 6vw, 72px) clamp(56px, 8vw, 120px); }
+.hero-name { margin-bottom: clamp(16px, 2vw, 24px); }
 .hero h1 {
   font-size: clamp(2.6rem, 6.4vw, 5.76rem);
   line-height: 1; letter-spacing: -0.04em; max-width: 13.5em;
 }
-.hero-grid {
-  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 64px);
-  margin-top: clamp(40px, 6vw, 72px); align-items: end;
+.facts {
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px clamp(16px, 3vw, 48px);
+  margin-top: clamp(40px, 6vw, 80px);
 }
-@media (max-width: 860px) { .hero-grid { grid-template-columns: minmax(0, 1fr); } }
-.facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px clamp(16px, 4vw, 48px); max-width: 520px; }
-.facts .label { display: block; margin-bottom: 4px; }
-.facts p { font-size: 14px; }
-.portrait {
-  position: relative; aspect-ratio: 4 / 3.4; border-radius: 4px; overflow: hidden;
-  background:
-    radial-gradient(120% 90% at 70% 15%, #FF8A3D 0%, rgba(255, 138, 61, 0) 55%),
-    radial-gradient(90% 80% at 15% 100%, #6A3CF5 0%, rgba(106, 60, 245, 0) 60%),
-    linear-gradient(160deg, #C2410C, #3B1A0B);
-  display: flex; align-items: flex-end; justify-content: space-between; padding: clamp(18px, 3vw, 32px);
-}
-.portrait .mono-big { font-family: var(--font-serif); font-weight: 300; font-size: clamp(5rem, 14vw, 12rem); line-height: .8; letter-spacing: -0.06em; color: rgba(255, 255, 255, 0.92); }
-.portrait .label { color: rgba(255, 255, 255, 0.8); text-align: right; }
+@media (max-width: 860px) { .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.facts .label { display: block; margin-bottom: 6px; }
+.facts p { font-size: 15px; max-width: 18em; }
 
 /* selected work */
 .works { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 clamp(16px, 2.2vw, 32px); }
@@ -64,6 +54,17 @@
 .work .meta { display: flex; justify-content: space-between; gap: 16px; margin-top: 16px; font-size: 15px; }
 .work .meta b { font-weight: 500; }
 .work .meta span { color: var(--muted); font-size: 13px; white-space: nowrap; }
+.work-cta {
+  position: relative; display: inline-flex; align-items: center; gap: 8px; margin-top: 16px; padding-bottom: 4px;
+  font-size: 15px; font-weight: 500; color: var(--fg);
+}
+.work-cta svg { width: 14px; height: 14px; transition: transform .3s cubic-bezier(.2, .7, .2, 1); }
+.work-cta::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: currentColor;
+  transform: scaleX(0); transform-origin: left; transition: transform .35s cubic-bezier(.2, .7, .2, 1);
+}
+.work:hover .work-cta::after, .work:focus-visible .work-cta::after { transform: scaleX(1); }
+.work:hover .work-cta svg, .work:focus-visible .work-cta svg { transform: translateX(4px); }
 .work p { color: var(--muted); max-width: 30em; margin-top: 4px; }
 
 /* CSS-drawn interface mocks */
@@ -139,6 +140,7 @@ a.q-tag:hover { color: var(--fg); border-color: var(--accent); }
 .see-all[aria-expanded="true"] svg { transform: rotate(180deg); }
 
 @media (prefers-reduced-motion: reduce) {
+  .work-cta svg, .work-cta::after { transition: none; }
   .quote.is-new { animation: none; }
   .quote, .quote::before { transition: none; }
   .quote:hover { transform: none; }
@@ -153,7 +155,7 @@ a.q-tag:hover { color: var(--fg); border-color: var(--accent); }
 <div class="page">
   <header class="top">
     <div class="wrap">
-      <a class="id" href="#top"><b>Anton Shmatko</b><span>Senior Product Designer</span></a>
+      <a class="id" href="#top" aria-label="Anton Shmatko — home"><span class="logo-ph">Logo</span></a>
       <nav class="main" aria-label="Main">
         <a class="link" href="#work">Work</a>
         <a class="link" href="#kind-words">Kind words</a>
@@ -164,19 +166,16 @@ a.q-tag:hover { color: var(--fg); border-color: var(--accent); }
 
   <main id="top">
     <div class="wrap hero">
+      <p class="label hero-name">Anton Shmatko</p>
       <h1>Senior Product Designer. Making complex products <span class="accent">simple</span> and scalable for SaaS, AI and Web3.</h1>
 
-      <div class="hero-grid">
-        <div class="facts">
-          <div><span class="label">Experience</span><p>10+ years, web &amp; mobile</p></div>
-          <div><span class="label">Focus</span><p>Product UX/UI, Design Systems</p></div>
-          <div><span class="label">Domains</span><p>SaaS, AI, Web3, Marketplaces, Enterprise</p></div>
-          <div><span class="label">Open for</span><p>New products &amp; redesigns</p></div>
-        </div>
-        <div class="portrait reveal" aria-hidden="true">
-          <span class="mono-big">AS</span>
-          <span class="label">Figma + AI workflows<br>React / Tailwind aware</span>
-        </div>
+      <div class="facts">
+        <div><span class="label">Experience</span><p>10+ years, web &amp; mobile</p></div>
+        <div><span class="label">Focus</span><p>Product UX/UI, Design Systems</p></div>
+        <div><span class="label">Domains</span><p>SaaS, AI, Web3, Marketplaces, Enterprise</p></div>
+        <div><span class="label">Open for</span><p>New products &amp; redesigns</p></div>
+      </div>
+    </div>
       </div>
     </div>
 
@@ -191,6 +190,7 @@ a.q-tag:hover { color: var(--fg); border-color: var(--accent); }
               </div>
               <div class="meta"><b>Lumi AI</b><span>AI analytics</span></div>
               <p>An AI-powered analytics platform that turns complex business data into actionable insights through conversational AI, interactive dashboards, and connected knowledge sources.</p>
+              <span class="work-cta">View case study <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg></span>
             </a>
             <a class="work reveal" href="work/furbnow.html">
               <div class="media" style="--g: linear-gradient(150deg, #14532D, #22C55E 60%, #D9F99D)">
@@ -202,6 +202,7 @@ a.q-tag:hover { color: var(--fg); border-color: var(--accent); }
               </div>
               <div class="meta"><b>Furbnow</b><span>Home energy</span></div>
               <p>A home energy platform that helps homeowners plan and manage energy-saving improvements, making complex renovation decisions easier to understand.</p>
+              <span class="work-cta">View case study <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg></span>
             </a>
             <a class="work reveal" href="work/unagi.html">
               <div class="media" style="--g: linear-gradient(135deg, #111827, #312E81 55%, #F59E0B)">
@@ -213,6 +214,7 @@ a.q-tag:hover { color: var(--fg); border-color: var(--accent); }
               </div>
               <div class="meta"><b>Unagi / Ultimate Champions</b><span>Fantasy sports</span></div>
               <p>A fantasy sports gaming platform where fans collect digital player cards, build teams, and compete based on real-world football and basketball performances.</p>
+              <span class="work-cta">View case study <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg></span>
             </a>
             <a class="work reveal" href="work/trumpet.html">
               <div class="media" style="--g: linear-gradient(135deg, #F2F4F8, #D8DDE8)">
@@ -224,6 +226,7 @@ a.q-tag:hover { color: var(--fg); border-color: var(--accent); }
               </div>
               <div class="meta"><b>Trumpet</b><span>B2B sales</span></div>
               <p>A B2B sales collaboration platform that brings content, conversations, and next steps into shared digital workspaces, helping buyers and sellers move deals forward.</p>
+              <span class="work-cta">View case study <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg></span>
             </a>
           </div>
           <div class="col">
@@ -233,6 +236,7 @@ a.q-tag:hover { color: var(--fg); border-color: var(--accent); }
               </div>
               <div class="meta"><b>Mava AI</b><span>AI support</span></div>
               <p>An AI-powered customer support platform that brings conversations into one workspace, helping teams automate common questions and manage support across multiple channels.</p>
+              <span class="work-cta">View case study <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg></span>
             </a>
             <a class="work reveal" href="work/falc-ai.html">
               <div class="media" style="--g: linear-gradient(160deg, #0F172A, #1E293B 60%, #14B8A6)">
@@ -244,6 +248,7 @@ a.q-tag:hover { color: var(--fg); border-color: var(--accent); }
               </div>
               <div class="meta"><b>Falc AI</b><span>Retail analytics</span></div>
               <p>An AI-powered retail analytics product that helps teams understand store performance, explore data, and identify opportunities for improvement.</p>
+              <span class="work-cta">View case study <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg></span>
             </a>
             <a class="work reveal" href="work/aurbitrage.html">
               <div class="media" style="--g: linear-gradient(150deg, #422006, #A16207 55%, #FDE68A)">
@@ -255,6 +260,7 @@ a.q-tag:hover { color: var(--fg); border-color: var(--accent); }
               </div>
               <div class="meta"><b>Aurbitrage</b><span>B2B marketplace</span></div>
               <p>A B2B marketplace for precious metals dealers, bringing live pricing, trading opportunities, listings, and direct communication into one platform.</p>
+              <span class="work-cta">View case study <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg></span>
             </a>
             <a class="work reveal" href="work/muso-ai.html">
               <div class="media" style="--g: linear-gradient(150deg, #FFF1EC, #FF8A65 60%, #BE185D)">
@@ -266,6 +272,7 @@ a.q-tag:hover { color: var(--fg); border-color: var(--accent); }
               </div>
               <div class="meta"><b>Muso.AI</b><span>Music analytics</span></div>
               <p>A music credits and analytics platform that helps music professionals showcase their work, explore collaborations, and track the performance of their credited releases.</p>
+              <span class="work-cta">View case study <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg></span>
             </a>
           </div>
         </div>

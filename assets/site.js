@@ -64,6 +64,39 @@
     }, { passive: true });
   }
 
+  // back to top: round button whose ring fills with scroll progress
+  (function () {
+    var R = 22, C = 2 * Math.PI * R;
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'to-top';
+    btn.setAttribute('aria-label', 'Back to top');
+    btn.innerHTML =
+      '<svg class="to-top-ring" viewBox="0 0 52 52" aria-hidden="true">' +
+        '<circle cx="26" cy="26" r="' + R + '" class="track"/>' +
+        '<circle cx="26" cy="26" r="' + R + '" class="bar" stroke-dasharray="' + C.toFixed(2) + '" stroke-dashoffset="' + C.toFixed(2) + '"/>' +
+      '</svg>' +
+      '<svg class="to-top-arrow" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 13V3M4 7l4-4 4 4" stroke="currentColor" stroke-width="1.5"/></svg>';
+    document.body.appendChild(btn);
+    var bar = btn.querySelector('.bar');
+    var ticking = false;
+    function update() {
+      ticking = false;
+      var max = document.documentElement.scrollHeight - innerHeight;
+      var p = max > 0 ? Math.min(Math.max(window.scrollY / max, 0), 1) : 0;
+      bar.setAttribute('stroke-dashoffset', (C * (1 - p)).toFixed(2));
+      btn.classList.toggle('is-visible', window.scrollY > innerHeight * 0.4);
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }, { passive: true });
+    window.addEventListener('resize', update);
+    btn.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+    });
+    update();
+  })();
+
   // reveal on scroll
   var items = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window) {
