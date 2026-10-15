@@ -18,15 +18,15 @@
 /* light theme, switched by the header toggle (site.js) and restored before paint by the inline script in <head> */
 html[data-theme="light"] {
   color-scheme: light;
-  --bg: #F5F4F0;
-  --surface: #FFFFFF;
+  --bg: #FFFFFF;
+  --surface: #F5F5F5;
   --fg: #121417;
   --muted: rgba(18, 20, 23, 0.62);
   --faint: rgba(18, 20, 23, 0.4);
   --line: rgba(18, 20, 23, 0.12);
   --accent: #6D5DF5;
   --accent-2: #9B6DFF;
-  --bg-rgb: 245, 244, 240;
+  --bg-rgb: 255, 255, 255;
   --star-rgb: 18, 20, 23;
 }
 
