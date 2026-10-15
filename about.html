@@ -28,6 +28,18 @@
 .about .facts p { font-size: 15px; max-width: 18em; }
 .about .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
 .about .tags span { font-size: 14px; padding: 6px 14px; border: 1px solid var(--line); border-radius: 999px; }
+.ai-think { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px clamp(32px, 6vw, 120px); margin-top: clamp(64px, 9vw, 140px); }
+@media (max-width: 860px) { .ai-think { grid-template-columns: minmax(0, 1fr); } }
+.ai-think h2 { font-size: clamp(2.25rem, 4.4vw, 4rem); line-height: 1.05; letter-spacing: -0.03em; margin-top: 18px; max-width: 11em; }
+.principles { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.principle { display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: 0 12px; padding-block: clamp(24px, 3vw, 36px); border-bottom: 1px solid var(--line); }
+.principle-num { font-size: 12px; color: var(--accent); padding-top: .55em; font-variant-numeric: tabular-nums; }
+.principle h3 { font-size: clamp(1.25rem, 1.8vw, 1.6rem); font-weight: 400; line-height: 1.25; letter-spacing: -0.01em; }
+.principle p { color: var(--muted); font-size: 1.0625rem; line-height: 1.6; margin-top: 10px; max-width: 34em; }
+/* same look and hover as "View case study" (.work-cta in site.css) */
+.principle-link { margin-top: 18px; text-decoration: none; }
+.principle-link:is(:hover, :focus-visible)::after { transform: scaleX(1); }
+.principle-link:is(:hover, :focus-visible) svg { transform: translateX(4px); }
 </style>
 </head>
 <body>
@@ -72,6 +84,39 @@
         <div class="tags"><span>Figma</span><span>Design systems</span><span>Prototyping</span><span>AI workflows</span><span>HTML / CSS</span><span>React</span><span>Tailwind</span></div>
       </div>
     </div>
+
+    <section class="ai-think reveal" aria-labelledby="ai-h">
+      <div>
+        <span class="label">How I think about AI</span>
+        <h2 id="ai-h">AI should make complex work feel <span class="accent">clear</span>.</h2>
+      </div>
+      <ol class="principles">
+        <li class="principle">
+          <span class="principle-num">01</span>
+          <div>
+            <h3>Show how the answer was made.</h3>
+            <p>People trust AI when they can see the steps, data and queries behind a result — and check it for themselves before acting on it.</p>
+            <a class="work-cta principle-link" href="work/lumi-ai.html">Transparent analysis in Lumi AI <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg></a>
+          </div>
+        </li>
+        <li class="principle">
+          <span class="principle-num">02</span>
+          <div>
+            <h3>Keep people in control.</h3>
+            <p>Let automation handle the routine, but make the hand-off to a human obvious and smooth, so teams stay in charge of what matters.</p>
+            <a class="work-cta principle-link" href="work/mava-ai.html">AI-assisted support in Mava AI <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg></a>
+          </div>
+        </li>
+        <li class="principle">
+          <span class="principle-num">03</span>
+          <div>
+            <h3>Prototype the behaviour, not just the screen.</h3>
+            <p>AI products are defined by how they respond. Interactive prototypes let the team feel that behaviour early and decide together what to build.</p>
+            <a class="work-cta principle-link" href="work/index.html">See all work <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg></a>
+          </div>
+        </li>
+      </ol>
+    </section>
   </main>
 
   <footer class="foot" id="contact">
