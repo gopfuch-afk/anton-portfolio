@@ -54,18 +54,18 @@ figcaption { margin-top: 12px; font-size: 13px; color: var(--muted); }
 .ph {
   position: absolute; inset: 0; display: none; flex-direction: column; align-items: center; justify-content: center;
   gap: 8px; padding: 24px; text-align: center; font-size: 13px; color: var(--muted);
-  border: 1px dashed color-mix(in srgb, var(--accent) 60%, transparent); border-radius: inherit;
-  background: repeating-linear-gradient(45deg, rgba(174, 168, 254, .06) 0 12px, transparent 12px 24px), var(--surface);
+  border: 1px dashed color-mix(in srgb, var(--fg) 30%, transparent); border-radius: inherit;
+  background: repeating-linear-gradient(45deg, color-mix(in srgb, var(--fg) 4%, transparent) 0 12px, transparent 12px 24px), var(--surface);
 }
-.ph b { font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+.ph b { font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--fg); }
 .ph code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px; color: var(--fg); overflow-wrap: anywhere; }
 .frame.is-missing > .ph,
 .frame.video.no-poster:not(.playing) > .ph { display: flex; }
 .frame.video.no-poster:not(.playing) > .ph { padding-bottom: 96px; }
 
 .ph-text {
-  color: var(--accent); background: rgba(174, 168, 254, .08);
-  border: 1px dashed color-mix(in srgb, var(--accent) 50%, transparent); border-radius: 4px; padding: 2px 8px;
+  color: var(--fg); background: color-mix(in srgb, var(--fg) 6%, transparent);
+  border: 1px dashed color-mix(in srgb, var(--fg) 30%, transparent); border-radius: 4px; padding: 2px 8px;
   -webkit-box-decoration-break: clone; box-decoration-break: clone;
 }
 p.ph-text, ul.ph-text { padding: 12px 16px; }
@@ -79,7 +79,7 @@ ul.ph-text { padding-left: 32px; }
   font: 500 15px/1 var(--font-sans); box-shadow: 0 12px 32px -12px rgba(0, 0, 0, .6); transition: background .2s;
 }
 .frame.no-poster .play { top: auto; bottom: 28px; transform: translateX(-50%); }
-.play:hover { background: var(--accent); }
+.play:hover { background: color-mix(in srgb, var(--fg) 82%, var(--bg)); }
 .play svg { width: 14px; height: 14px; }
 .frame.playing .play { display: none; }
 .toggle {
@@ -112,7 +112,7 @@ ul.ph-text { padding-left: 32px; }
 .stat-num {
   font-family: var(--font-serif); font-weight: 300; line-height: 1; letter-spacing: -0.04em;
   font-size: clamp(2.6rem, 4vw, 3.75rem); margin-bottom: 16px; white-space: nowrap;
-  background: linear-gradient(90deg, var(--fg) 40%, var(--accent)); -webkit-background-clip: text; background-clip: text; color: transparent;
+  color: var(--fg);
 }
 .stat-num span { font-size: .45em; letter-spacing: -0.01em; }
 .stat p:last-child { color: var(--muted); font-size: 14px; max-width: 22em; }

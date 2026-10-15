@@ -38,9 +38,9 @@
 @keyframes quote-in { from { opacity: 0; transform: translateY(12px); } }
 .q-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
 .q-mark {
-  /* quote icon: SVG used as a mask so it takes the lilac gradient */
+  /* quote icon: SVG used as a mask, filled with the text colour */
   display: block; flex: none; width: clamp(32px, 3vw, 40px); aspect-ratio: 1;
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  background: var(--fg);
   -webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2024%2022'%3E%3Ccircle%20cx%3D'6'%20cy%3D'15.5'%20r%3D'4.5'%2F%3E%3Cpath%20d%3D'M1.5%2015.5C1.5%209.5%204.7%205%2010.4%203l.7%201.7C8%206.3%206.2%208.6%206%2011.2z'%2F%3E%3Ccircle%20cx%3D'18.5'%20cy%3D'15.5'%20r%3D'4.5'%2F%3E%3Cpath%20d%3D'M14%2015.5C14%209.5%2017.2%205%2022.9%203l.7%201.7C20.5%206.3%2018.7%208.6%2018.5%2011.2z'%2F%3E%3C%2Fsvg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2024%2022'%3E%3Ccircle%20cx%3D'6'%20cy%3D'15.5'%20r%3D'4.5'%2F%3E%3Cpath%20d%3D'M1.5%2015.5C1.5%209.5%204.7%205%2010.4%203l.7%201.7C8%206.3%206.2%208.6%206%2011.2z'%2F%3E%3Ccircle%20cx%3D'18.5'%20cy%3D'15.5'%20r%3D'4.5'%2F%3E%3Cpath%20d%3D'M14%2015.5C14%209.5%2017.2%205%2022.9%203l.7%201.7C20.5%206.3%2018.7%208.6%2018.5%2011.2z'%2F%3E%3C%2Fsvg%3E") center / contain no-repeat;
 }
 .q-tag {
@@ -49,7 +49,7 @@
   transition: color .2s, border-color .2s;
 }
 .q-tag svg { width: 12px; height: 12px; }
-a.q-tag:hover { color: var(--fg); border-color: var(--accent); }
+a.q-tag:hover { color: var(--fg); border-color: var(--fg); }
 .quote blockquote { margin: 0; flex: 1; }
 .quote blockquote:focus { outline: none; }
 .quote blockquote p {
@@ -64,7 +64,7 @@ a.q-tag:hover { color: var(--fg); border-color: var(--accent); }
   width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; cursor: pointer;
   background: transparent; border: 1px solid var(--line); color: var(--fg); transition: border-color .2s, color .2s;
 }
-.q-btn:hover { border-color: var(--accent); color: var(--accent); }
+.q-btn:hover { border-color: var(--fg); color: var(--fg); }
 .q-btn svg { width: 16px; height: 16px; }
 .q-count { font-size: 14px; color: var(--muted); min-width: 3.5em; text-align: center; font-variant-numeric: tabular-nums; }
 .q-count b { color: var(--fg); font-weight: 500; }
@@ -194,7 +194,7 @@ a.q-tag:hover { color: var(--fg); border-color: var(--accent); }
     <div class="wrap">
       <span class="label">Let’s work together</span>
       <a class="foot-cta" href="mailto:antonshmatko.designs@gmail.com">
-        <span class="foot-title">Let’s talk about<br>what comes <span class="accent">next</span>.</span>
+        <span class="foot-title">Let’s talk about<br>what comes next.</span>
         <svg class="foot-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg>
       </a>
       <button class="foot-mail" type="button" data-copy="antonshmatko.designs@gmail.com" aria-label="Copy email address antonshmatko.designs@gmail.com">
