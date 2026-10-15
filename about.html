@@ -40,6 +40,21 @@
 .principle-link { margin-top: 18px; text-decoration: none; }
 .principle-link:is(:hover, :focus-visible)::after { transform: scaleX(1); }
 .principle-link:is(:hover, :focus-visible) svg { transform: translateX(4px); }
+.services-wrap { margin-top: clamp(64px, 9vw, 140px); }
+.services-title { text-align: center; font-size: clamp(2.25rem, 4.4vw, 4rem); line-height: 1.05; letter-spacing: -0.03em; margin-bottom: clamp(32px, 4vw, 56px); }
+.services { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--line); }
+@media (max-width: 960px) { .services { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .services { grid-template-columns: minmax(0, 1fr); } }
+.service { padding: 28px clamp(16px, 2.2vw, 28px) 40px; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); min-width: 0; }
+.services .service:nth-child(3n) { border-right: 0; }
+@media (max-width: 960px) {
+  .services .service:nth-child(3n) { border-right: 1px solid var(--line); }
+  .services .service:nth-child(2n) { border-right: 0; }
+}
+@media (max-width: 600px) { .services .service { border-right: 0 !important; padding-inline: 0; } }
+.service .num { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.service h3 { font-size: clamp(1.5rem, 2.2vw, 2rem); font-weight: 400; letter-spacing: -0.02em; margin: 28px 0 14px; line-height: 1.1; }
+.service p { color: var(--muted); max-width: 26em; line-height: 1.6; }
 </style>
 </head>
 <body>
@@ -84,6 +99,18 @@
         <div class="tags"><span>Figma</span><span>Design systems</span><span>Prototyping</span><span>AI workflows</span><span>HTML / CSS</span><span>React</span><span>Tailwind</span></div>
       </div>
     </div>
+
+    <section class="services-wrap reveal" aria-labelledby="services-h">
+      <h2 id="services-h" class="services-title">What I do</h2>
+      <div class="services">
+        <div class="service"><span class="num">01</span><h3>Product design</h3><p>End-to-end UX and UI, from problem framing and user flows to polished screens ready to ship.</p></div>
+        <div class="service"><span class="num">02</span><h3>UX research &amp; flows</h3><p>Understanding people first, then mapping journeys and testing ideas with interactive prototypes.</p></div>
+        <div class="service"><span class="num">03</span><h3>UI for web &amp; mobile</h3><p>Clear, modern, consistent interfaces that are responsive and accessible on every screen.</p></div>
+        <div class="service"><span class="num">04</span><h3>Design systems</h3><p>Reusable components, Figma variables and design tokens that keep designers and developers aligned.</p></div>
+        <div class="service"><span class="num">05</span><h3>SaaS improvement</h3><p>Simplifying existing products so users move through complex workflows with less friction.</p></div>
+        <div class="service"><span class="num">06</span><h3>Developer handoff</h3><p>Specs, components and tokens that map cleanly to code, so builds are faster and reviews hold fewer surprises.</p></div>
+      </div>
+    </section>
 
     <section class="ai-think reveal" aria-labelledby="ai-h">
       <div>
