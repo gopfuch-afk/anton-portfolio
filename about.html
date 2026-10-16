@@ -19,13 +19,6 @@
 .about-body { display: flex; flex-direction: column; gap: 20px; max-width: 40em; }
 .about-body p { color: var(--muted); font-size: clamp(1.0625rem, 1.5vw, 1.25rem); line-height: 1.6; }
 .about-body strong { color: var(--fg); font-weight: 500; }
-.about .facts {
-  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px clamp(16px, 3vw, 48px);
-  margin-top: clamp(48px, 7vw, 96px);
-}
-@media (max-width: 860px) { .about .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-.about .facts .label { display: block; margin-bottom: 6px; }
-.about .facts p { font-size: 15px; max-width: 18em; }
 .about .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
 .about .tags span { font-size: 14px; padding: 6px 14px; border: 1px solid var(--line); border-radius: 999px; }
 .ai-think { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px clamp(32px, 6vw, 120px); margin-top: clamp(64px, 9vw, 140px); }
@@ -75,13 +68,6 @@
   <main id="top" class="wrap about">
     <span class="label">About</span>
     <h1>I make complex products feel <span class="accent">simple</span>.</h1>
-
-    <div class="facts">
-      <div><span class="label">Experience</span><p>10+ years, web &amp; mobile</p></div>
-      <div><span class="label">Focus</span><p>Product UX/UI, Design Systems</p></div>
-      <div><span class="label">Domains</span><p>SaaS, AI, Web3, Marketplaces, Enterprise</p></div>
-      <div><span class="label">Open for</span><p>New products &amp; redesigns</p></div>
-    </div>
 
     <div class="about-grid reveal">
       <h2>Hi, I’m Anton</h2>
