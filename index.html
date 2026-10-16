@@ -20,12 +20,12 @@
   line-height: 1; letter-spacing: -0.04em; max-width: 13.5em;
 }
 .facts {
-  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px clamp(16px, 3vw, 48px);
+  display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: 28px clamp(40px, 6vw, 96px);
   margin-top: clamp(40px, 6vw, 80px);
 }
 @media (max-width: 860px) { .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .facts .label { display: block; margin-bottom: 6px; }
-.facts p { font-size: 15px; max-width: 18em; }
+.facts p { font-size: 15px; }
 
 /* kind words */
 .q-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px 48px; margin-bottom: clamp(32px, 4vw, 56px); }
