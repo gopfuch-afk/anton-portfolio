@@ -111,24 +111,25 @@ footer.foot { padding-top: clamp(48px, 7vw, 96px); padding-bottom: 32px; }
 .foot-title {
   font-family: var(--font-serif); font-weight: 300; line-height: 1; letter-spacing: -0.04em;
   font-size: clamp(2.6rem, 6.4vw, 5.76rem);
-  /* hover: a warm, Gargantua-like band (orange > amber > gold > white-hot > gold > amber > orange) passes once across the text, bottom-left to top-right */
+  /* hover: a polished-silver highlight passes once across the text, bottom-left to top-right:
+     alternating dark and bright chrome reflections with a faint cool tint */
   background: linear-gradient(45deg,
-    var(--fg) 0%, var(--fg) 36%,
-    #F2913F 40%, #FFAE4F 43%, #FFC765 46%, #FFDD8E 49%, #FFF5DE 51%, #FFDD8E 53%, #FFC765 55%, #FFAE4F 57%, #F2913F 59%,
-    var(--fg) 62%, var(--fg) 100%);
+    var(--fg) 0%, var(--fg) 34%,
+    #6E7378 37%, #C9CED3 39.5%, #FFFFFF 41.5%, #7D838A 44%, #E4EAF0 46.5%, #FFFFFF 48.5%, #D9E6F2 50%, #8E959C 52.5%, #4F555B 54.5%, #D5DADF 57%, #FFFFFF 58.5%, #9AA0A6 61%,
+    var(--fg) 64%, var(--fg) 100%);
   background-size: 300% 300%; background-position: 100% 0;
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
-/* light theme: the white-hot core would vanish on white, so the band peaks at deep gold */
+/* light theme: bright reflections would vanish on white, so the silver uses darker steel tones */
 html[data-theme="light"] .foot-title {
   background-image: linear-gradient(45deg,
-    var(--fg) 0%, var(--fg) 36%,
-    #D8742A 40%, #E98C33 43%, #F2A33C 46%, #F5B648 49%, #F7C556 51%, #F5B648 53%, #F2A33C 55%, #E98C33 57%, #D8742A 59%,
-    var(--fg) 62%, var(--fg) 100%);
+    var(--fg) 0%, var(--fg) 34%,
+    #3A3F44 37%, #8F969C 39.5%, #C2C8CD 41.5%, #4A5056 44%, #A3AAB0 46.5%, #CDD3D8 48.5%, #9FB0C0 50%, #5B6167 52.5%, #2C3136 54.5%, #A7AEB4 57%, #C9CFD4 58.5%, #6B7177 61%,
+    var(--fg) 64%, var(--fg) 100%);
 }
 .foot-cta:is(:hover, :focus-visible) .foot-title { animation: rainbow-sweep 1.2s cubic-bezier(.4, .05, .75, .45) both; /* gentle start, fast finish */ }
-/* 93% 7% is where the band just touches the bottom-left of the text, 4% 96% where it has just left the top-right */
-@keyframes rainbow-sweep { from { background-position: 93% 7%; } to { background-position: 4% 96%; } }
+/* 96% 4% is where the band (34–64%) just touches the bottom-left of the text, 1% 99% where it has just left the top-right */
+@keyframes rainbow-sweep { from { background-position: 96% 4%; } to { background-position: 1% 99%; } }
 .foot-arrow {
   width: clamp(40px, 6vw, 88px); height: clamp(40px, 6vw, 88px); align-self: start;
   transition: transform .3s cubic-bezier(.2, .7, .2, 1), color .2s;
