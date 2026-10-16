@@ -67,7 +67,7 @@
     }, { passive: true });
   }
 
-  // theme toggle: light (default) / dark, remembered in localStorage
+  // theme toggle: light (default) / dark, kept only for this tab (sessionStorage), so every new visit opens light
   (function () {
     var nav = document.querySelector('nav.main');
     if (!nav) return;
@@ -84,7 +84,7 @@
     btn.addEventListener('click', function () {
       var light = root.getAttribute('data-theme') !== 'light';
       if (light) root.setAttribute('data-theme', 'light'); else root.removeAttribute('data-theme');
-      try { localStorage.setItem('theme', light ? 'light' : 'dark'); } catch (e) {}
+      try { sessionStorage.setItem('theme', light ? 'light' : 'dark'); } catch (e) {}
       sync();
       readStar();
       if (reduce) draw(0);
