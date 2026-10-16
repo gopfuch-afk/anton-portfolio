@@ -67,7 +67,7 @@
     }, { passive: true });
   }
 
-  // theme toggle: dark (default) / light, remembered in localStorage
+  // theme toggle: light (default) / dark, remembered in localStorage
   (function () {
     var nav = document.querySelector('nav.main');
     if (!nav) return;
