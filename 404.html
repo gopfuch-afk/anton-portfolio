@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Page not found — Anton Shmatko</title>
+<meta name="robots" content="noindex">
+<script>var d=document.documentElement;try{localStorage.removeItem('theme');if(sessionStorage.getItem('theme')!=='dark')d.setAttribute('data-theme','light')}catch(e){d.setAttribute('data-theme','light')}</script>
+<link rel="icon" href="/assets/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+/* served for any missing path, so every link here is root-relative */
+.notfound { min-height: calc(100svh - 72px); display: flex; flex-direction: column; justify-content: center; padding-block: 48px 96px; }
+.notfound h1 { font-size: clamp(2.6rem, 6.4vw, 5.76rem); line-height: 1; letter-spacing: -0.04em; margin-top: 18px; max-width: 12em; }
+.notfound p { color: var(--muted); font-size: clamp(1.0625rem, 1.6vw, 1.25rem); line-height: 1.5; margin-top: 24px; max-width: 32em; }
+.notfound-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 24px; margin-top: 40px; }
+.notfound-actions .link { color: var(--muted); text-decoration: none; transition: color .2s; }
+.notfound-actions .link:hover { color: var(--fg); }
+</style>
+</head>
+<body>
+<canvas id="stars" aria-hidden="true"></canvas>
+
+<div class="page">
+  <header class="top">
+    <div class="wrap">
+      <a class="id" href="/" aria-label="Anton Shmatko — home"><span class="logo">AS</span></a>
+      <span class="status"><i aria-hidden="true"></i>Open to new opportunities</span>
+      <nav class="main" aria-label="Main">
+        <a class="link" href="/work">Work</a>
+        <a class="link" href="/about">About</a>
+        <a class="pill" href="mailto:antonshmatko.designs@gmail.com">Get in touch</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap notfound">
+    <span class="label">404</span>
+    <h1>This page doesn’t exist.</h1>
+    <p>The link may be broken or the page may have moved. The work is still here.</p>
+    <div class="notfound-actions">
+      <a class="pill" href="/">Back to home</a>
+      <a class="link" href="/work">See selected work →</a>
+    </div>
+  </main>
+</div>
+
+<script src="/assets/site.js"></script>
+</body>
+</html>
