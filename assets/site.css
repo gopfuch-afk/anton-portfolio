@@ -67,6 +67,12 @@ header.top {
 .id { display: flex; align-items: center; text-decoration: none; }
 .logo { font-size: 26px; font-weight: 500; letter-spacing: -0.02em; line-height: 1; transition: opacity .2s; }
 .id:hover .logo { opacity: .75; }
+/* availability status next to the logo; margin-right: auto keeps it beside the logo */
+.status { display: inline-flex; align-items: center; gap: 10px; margin-right: auto; margin-left: clamp(16px, 2.4vw, 32px); font-size: 14px; color: var(--muted); white-space: nowrap; }
+.status i { position: relative; width: 8px; height: 8px; border-radius: 50%; background: var(--fg); }
+.status i::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: var(--fg); animation: status-pulse 2s ease-out infinite; }
+@keyframes status-pulse { from { transform: scale(1); opacity: .5; } to { transform: scale(2.8); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .status i::after { animation: none; } }
 nav.main { display: flex; align-items: center; gap: 28px; font-size: 14px; }
 .theme-toggle {
   width: 38px; height: 38px; padding: 0; border-radius: 50%; cursor: pointer; flex: none;
@@ -89,6 +95,7 @@ nav.main a.link:hover { color: var(--fg); }
 /* phones: keep Work and About visible, tighten spacing */
 @media (max-width: 760px) {
   nav.main { gap: 14px; }
+  .status { display: none; }
   .theme-toggle { width: 34px; height: 34px; }
   nav.main .pill { height: 34px; padding: 0 14px; font-size: 14px; }
 }
