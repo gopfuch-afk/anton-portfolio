@@ -224,3 +224,7 @@ nav.main a.link[aria-current="page"]::after { transform: scaleX(1); }
   nav.main a.link::after, .foot-link::after { transition: none; }
   .work-cta svg, .work-cta::after { transition: none; }
 }
+
+/* theme switch: the new theme is revealed through four curtains (clip-path set in site.js);
+   the default cross-fade is turned off so only the curtains move */
+::view-transition-old(root), ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }

@@ -81,13 +81,40 @@
       btn.setAttribute('aria-label', light ? 'Switch to dark theme' : 'Switch to light theme');
       btn.setAttribute('aria-pressed', String(light));
     }
-    btn.addEventListener('click', function () {
-      var light = root.getAttribute('data-theme') !== 'light';
+    function apply(light) {
       if (light) root.setAttribute('data-theme', 'light'); else root.removeAttribute('data-theme');
       try { sessionStorage.setItem('theme', light ? 'light' : 'dark'); } catch (e) {}
       sync();
       readStar();
       if (reduce) draw(0);
+    }
+    // the new theme is revealed by four curtains moving left to right, one after another
+    // (down from the top into the dark theme, up from the bottom into the light one):
+    // a view transition keeps a snapshot of the old page, and the new one shows through
+    // four columns that grow from the top (falls back to an instant switch)
+    var busy = false;
+    function ease(t) { return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+    btn.addEventListener('click', function () {
+      var light = root.getAttribute('data-theme') !== 'light';
+      if (reduce || !document.startViewTransition) { apply(light); return; }
+      if (busy) return;
+      busy = true;
+      var COLS = 4, DUR = 600, GAP = 90, total = DUR + GAP * (COLS - 1), STEPS = 48, frames = [];
+      for (var f = 0; f <= STEPS; f++) {
+        // one outline: along the anchored edge, then back along the steps from the right-hand column to the left
+        var ms = f / STEPS * total, edge = light ? '100%' : '0%', pts = ['0% ' + edge, '100% ' + edge];
+        for (var c = COLS - 1; c >= 0; c--) {
+          var h = ease(Math.min(1, Math.max(0, (ms - c * GAP) / DUR))) * 100;
+          var y = (light ? 100 - h : h) + '%';
+          pts.push((c + 1) / COLS * 100 + '% ' + y, c / COLS * 100 + '% ' + y);
+        }
+        frames.push({ clipPath: 'polygon(' + pts.join(', ') + ')' });
+      }
+      var vt = document.startViewTransition(function () { apply(light); });
+      vt.ready.then(function () {
+        root.animate(frames, { duration: total, easing: 'linear', pseudoElement: '::view-transition-new(root)' });
+      }).catch(function () {});
+      vt.finished.then(function () { busy = false; }, function () { busy = false; });
     });
     nav.insertBefore(btn, nav.querySelector('.pill'));
     sync();
