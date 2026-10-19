@@ -52,6 +52,8 @@ h1, h2, h3 { margin: 0; font-weight: 300; font-family: var(--font-serif); text-w
 /* starfield */
 #stars { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
 html[data-theme="light"] #stars { display: none; }
+/* cursor water ripples (assets/ripple.js), under the content */
+#ripples { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
 .page { position: relative; z-index: 1; }
 .wrap { max-width: 1440px; margin-inline: auto; padding-inline: var(--gutter); }
 
