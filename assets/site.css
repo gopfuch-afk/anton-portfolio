@@ -109,7 +109,7 @@ nav.main a.link:hover { color: var(--fg); }
 
 /* sections */
 section { padding-block: clamp(64px, 9vw, 140px); }
-.sec-title { font-size: clamp(2.25rem, 4.4vw, 4rem); line-height: 1.05; letter-spacing: -0.03em; margin-bottom: clamp(32px, 4vw, 56px); }
+.sec-title { font-size: clamp(1.9rem, 3.5vw, 3.2rem); line-height: 1.05; letter-spacing: -0.03em; margin-bottom: clamp(32px, 4vw, 56px); }
 .sec-title.center { text-align: center; }
 
 /* footer */
