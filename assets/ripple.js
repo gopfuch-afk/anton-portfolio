@@ -122,10 +122,13 @@
     else idle = 0;
     raf = requestAnimationFrame(loop);
   }
+  function isLight() { return document.documentElement.getAttribute("data-theme") === "light"; }
+  // switching to the dark theme stills the water at once
+  function calm() { if (raf) { cancelAnimationFrame(raf); raf = 0; } ctx.clearRect(0, 0, gw, gh); a.fill(0); b.fill(0); last = null; }
   function wake() { idle = 0; if (!raf && !document.hidden) raf = requestAnimationFrame(loop); }
 
   window.addEventListener('pointermove', function (e) {
-    if (reduce.matches || e.pointerType !== 'mouse') return;
+    if (reduce.matches || e.pointerType !== 'mouse' || !isLight()) return; // light theme only
     var x = e.clientX, y = e.clientY, now = e.timeStamp;
     if (last) {
       var dx = x - last.x, dy = y - last.y, dist = Math.sqrt(dx * dx + dy * dy);
@@ -141,7 +144,7 @@
   }, { passive: true });
   document.addEventListener('pointerleave', function () { last = null; });
   document.addEventListener('visibilitychange', function () { if (document.hidden && raf) { cancelAnimationFrame(raf); raf = 0; } });
-  new MutationObserver(readColor).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+  new MutationObserver(function () { readColor(); if (!isLight()) calm(); }).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
   var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(resize, 150); });
 
   readColor();
