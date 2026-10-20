@@ -162,6 +162,8 @@
     var seq = [], t = 120;
     var head = document.querySelectorAll('header.top .id, header.top nav.main > *');
     head.forEach(function (el, i) { seq.push([el, 80 + i * 70]); });
+    var logo = document.querySelector('header.top .logo');
+    if (logo) writeSignature(logo, 120);
     t = 80 + head.length * 70;
     document.querySelectorAll('[data-enter]').forEach(function (box) {
       Array.prototype.forEach.call(box.children, function (el, i) {
@@ -175,6 +177,109 @@
     var lastAt = seq.length ? seq[seq.length - 1][1] : 0;
     enterUntil = Date.now() + lastAt + 250;
     setTimeout(function () { root.classList.remove('enter'); }, lastAt + 1600);
+
+    // the signature writes itself, letter by letter: S, h, m, a, t (stem, then bar), k, o with its tail,
+    // and finally the underline. Each letter is inked from its top down along its own lines, at pen speed.
+    // Coordinates are pixels of assets/signature.png (633×250); letters are split along the slant of the writing.
+    function writeSignature(logo, delay) {
+      var m = /url\(["']?([^"')]+)["']?\)/.exec(getComputedStyle(logo).webkitMaskImage || getComputedStyle(logo).maskImage || '');
+      if (!m) return;
+      var img = new Image();
+      img.onload = function () {
+        var W = img.naturalWidth, H = img.naturalHeight, sx = W / 633, sy = H / 250;
+        var src = document.createElement('canvas'); src.width = W; src.height = H;
+        var sg = src.getContext('2d', { willReadFrequently: true }); sg.drawImage(img, 0, 0);
+        var alpha = sg.getImageData(0, 0, W, H).data, N = W * H;
+        // strokes in writing order: S h m a t-stem t-bar k o underline
+        var SLANT = 0.35;
+        // centre of the underline, measured from the image; a narrow band keeps the tail of the o out of it
+        var LINE_PTS = [[176, 245], [200, 238], [250, 223.5], [300, 210], [350, 199], [400, 189], [450, 181], [500, 175], [540, 172.5], [600, 178.5]];
+        function lineY(x) {
+          for (var i = 1; i < LINE_PTS.length; i++) if (x <= LINE_PTS[i][0]) {
+            var p0 = LINE_PTS[i - 1], p1 = LINE_PTS[i]; return p0[1] + (p1[1] - p0[1]) * (x - p0[0]) / (p1[0] - p0[0]);
+          }
+          return LINE_PTS[LINE_PTS.length - 1][1];
+        }
+        function stroke(x, y) {
+          if (x >= 172 && x <= 600 && Math.abs(y - lineY(x)) < (x > 550 ? 6 : 7)) return 8;   // underline: a narrow band along it
+          if (x >= 340 && x <= 530 && Math.abs(y - (114 - (x - 348) * 0.2246)) < 6) return 5;  // t bar (348,114)→(540,72)
+          if (x > 524 && x < 550 && y > 62 && y < 94) return 5;                                  // … and its curl
+          if (x < 386) {                                                                         // S h m a, split along the slant
+            var u = x + (y - 125) * SLANT;
+            return u < 255 ? 0 : u < 300 ? 1 : u < 375 ? 2 : 3;
+          }
+          // t, k and o: the two tall strokes and the bar are followed along their own lines
+          if (y > 60 && y < 180 && Math.abs(x - (436 - (y - 68) * 0.365)) < 6) return 4;        // t stem (436,68)→(398,172)
+          if (y > 10 && y < 186 && Math.abs(x - (490 - (y - 18) * 0.494)) < 6) return 6;         // k stem (490,18)→(410,180)
+          if (y > 186 && x < 430) return 3;                                                      // the join from a, low down
+          return x < 466 ? 6 : 7;                                                                // k loop | o and its tail
+        }
+        var part = new Int8Array(N).fill(-1), when = new Float32Array(N).fill(-1e9);
+        var members = [[], [], [], [], [], [], [], [], []];
+        for (var p = 0; p < N; p++) {
+          if (alpha[p * 4 + 3] < 8) continue;
+          var k = stroke((p % W) / sx, ((p / W) | 0) / sy); part[p] = k; members[k].push(p);
+        }
+        // walk each stroke from its start (leftmost point along the slant; the S from the tip inside its loop)
+        var q = new Int32Array(N), clock = 0, marks = [];
+        members.forEach(function (list, k) {
+          if (!list.length) return;
+          var left = list.slice(), base = clock, far = clock;
+          while (left.length) {
+            var start = -1, best = 1e9;
+            // letters start at their highest point and the pen runs down along the lines;
+            // the t-bar and the underline are drawn from their left end
+            var fromLeft = k === 5 || k === 8;
+            left.forEach(function (pp) {
+              var v = fromLeft ? (pp % W) / sx : ((pp / W) | 0) / sy;
+              if (v < best) { best = v; start = pp; }
+            });
+            var head = 0, tail = 0; q[tail++] = start; when[start] = far === base ? base : far + 4;
+            while (head < tail) {
+              var cur = q[head++], cx = cur % W, cy = (cur / W) | 0, tc = when[cur];
+              for (var dy = -1; dy <= 1; dy++) for (var dx = -1; dx <= 1; dx++) {
+                var nx = cx + dx, ny = cy + dy, n = ny * W + nx;
+                if (nx < 0 || ny < 0 || nx >= W || ny >= H || part[n] !== k || when[n] > -1e8) continue;
+                when[n] = tc + 1; if (tc + 1 > far) far = tc + 1; q[tail++] = n;
+              }
+            }
+            left = left.filter(function (pp) { return when[pp] < -1e8; });
+          }
+          marks.push(far);
+          clock = far + (k === 7 ? 70 : 10); // the pen lifts a little longer before the underline
+        });
+        var total = marks[marks.length - 1], lettersEnd = marks[marks.length - 2], lineStart = lettersEnd + 70;
+        var rgb = (getComputedStyle(logo).backgroundColor.match(/\d+/g) || [0, 0, 0]).map(Number);
+        var out = sg.createImageData(W, H), od = out.data;
+        for (var i = 0; i < N; i++) { od[i * 4] = rgb[0]; od[i * 4 + 1] = rgb[1]; od[i * 4 + 2] = rgb[2]; }
+        var view = document.createElement('canvas');
+        var dpr = Math.min(window.devicePixelRatio || 1, 2), r = logo.getBoundingClientRect();
+        view.width = Math.round(r.width * dpr); view.height = Math.round(r.height * dpr);
+        view.style.cssText = 'display:block;width:100%;height:100%';
+        var vg = view.getContext('2d');
+        logo.classList.add('writing'); logo.appendChild(view);
+        // timing: the letters at writing pace, a short pen lift, then the underline as one quick flick
+        var LETTERS = 2200, LIFT = 140, LINE = 320, DUR = LETTERS + LIFT + LINE, EDGE = 14, t0 = 0;
+        function frame(now) {
+          if (!t0) t0 = now;
+          var ms = now - t0, kk = Math.min(1, ms / DUR), at;
+          if (ms < LETTERS) { var e = ms / LETTERS; e = e < .5 ? 2 * e * e : 1 - Math.pow(-2 * e + 2, 2) / 2; at = e * (lettersEnd + EDGE); }
+          else if (ms < LETTERS + LIFT) at = lettersEnd + EDGE;
+          else { var u = Math.min(1, (ms - LETTERS - LIFT) / LINE); u = 1 - Math.pow(1 - u, 3); at = lineStart + u * (total - lineStart + EDGE); }
+          for (var j = 0; j < N; j++) {
+            var w = when[j];
+            od[j * 4 + 3] = w < -1e8 || w > at ? 0 : alpha[j * 4 + 3] * Math.min(1, (at - w) / EDGE);
+          }
+          sg.putImageData(out, 0, 0);
+          vg.clearRect(0, 0, view.width, view.height);
+          vg.drawImage(src, 0, 0, view.width, view.height);
+          if (kk < 1) requestAnimationFrame(frame);
+          else { view.remove(); logo.classList.remove('writing'); } // back to the theme-aware mask
+        }
+        setTimeout(function () { requestAnimationFrame(frame); }, delay);
+      };
+      img.src = m[1];
+    }
 
     function splitWords(h) {
       var n = 0, walker = document.createTreeWalker(h, NodeFilter.SHOW_TEXT), texts = [];
