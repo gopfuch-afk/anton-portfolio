@@ -153,11 +153,57 @@
     update();
   })();
 
+  var enterUntil = 0; // when the entrance finishes; scroll reveals already in view wait for it
+  // entrance on load: header items, then the top block of the page ([data-enter] children) one after
+  // another; the main heading comes in word by word. Hidden by CSS only while html has .enter
+  (function () {
+    var root = document.documentElement;
+    if (!root.classList.contains('enter')) return;
+    var seq = [], t = 120;
+    var head = document.querySelectorAll('header.top .id, header.top nav.main > *');
+    head.forEach(function (el, i) { seq.push([el, 80 + i * 70]); });
+    t = 80 + head.length * 70;
+    document.querySelectorAll('[data-enter]').forEach(function (box) {
+      Array.prototype.forEach.call(box.children, function (el, i) {
+        if (el.classList.contains('reveal')) return;
+        if (/^H1$/.test(el.tagName)) splitWords(el);
+        seq.push([el, t + Math.min(i, 8) * 110]);
+      });
+    });
+    seq.forEach(function (p) { setTimeout(function () { p[0].classList.add('on'); }, p[1]); });
+    // after the last item has settled, drop the entrance styles altogether
+    var lastAt = seq.length ? seq[seq.length - 1][1] : 0;
+    enterUntil = Date.now() + lastAt + 250;
+    setTimeout(function () { root.classList.remove('enter'); }, lastAt + 1600);
+
+    function splitWords(h) {
+      var n = 0, walker = document.createTreeWalker(h, NodeFilter.SHOW_TEXT), texts = [];
+      while (walker.nextNode()) texts.push(walker.currentNode);
+      texts.forEach(function (node) {
+        var frag = document.createDocumentFragment();
+        node.textContent.split(/(\s+)/).forEach(function (part) {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+          var w = document.createElement('span');
+          w.className = 'w'; w.textContent = part; w.style.setProperty('--d', (n++ * 45) + 'ms');
+          frag.appendChild(w);
+        });
+        node.parentNode.replaceChild(frag, node);
+      });
+    }
+  })();
+
   // reveal on scroll
   var items = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        io.unobserve(e.target);
+        var wait = Math.max(0, enterUntil - Date.now());
+        if (wait) setTimeout(function () { e.target.classList.add('in'); }, wait);
+        else e.target.classList.add('in');
+      });
     }, { rootMargin: '0px 0px -8% 0px' });
     items.forEach(function (el) { io.observe(el); });
   } else {

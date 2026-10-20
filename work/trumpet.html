@@ -6,6 +6,7 @@
 <title>Trumpet — Case study — Anton Shmatko</title>
 <meta name="description" content="A B2B sales enablement platform. I built a comprehensive design system and a reusable filtering framework, giving the team consistent foundations that could be applied across the product.">
 <script>var d=document.documentElement;try{localStorage.removeItem('theme');if(sessionStorage.getItem('theme')!=='dark')d.setAttribute('data-theme','light')}catch(e){d.setAttribute('data-theme','light')}</script>
+<script>if(!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('enter');setTimeout(function(){document.documentElement.classList.remove('enter')},5000)}</script>
 <meta name="robots" content="noindex"> <!-- hidden case: remove when Trumpet is shown again -->
 <link rel="canonical" href="https://www.antonshmatko.com/work/trumpet">
 <meta property="og:type" content="website">
@@ -42,7 +43,7 @@
   </header>
 
   <main>
-    <div class="wrap case-hero">
+    <div class="wrap case-hero" data-enter>
       <a class="label back" href="index.html"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true" width="14" height="14"><path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.5"/></svg>All work</a>
       <span class="label eyebrow">Case study · B2B sales</span>
       <h1>Trumpet</h1>

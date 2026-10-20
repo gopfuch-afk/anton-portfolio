@@ -6,6 +6,7 @@
 <title>Muso.AI — Case study — Anton Shmatko</title>
 <meta name="description" content="A music credits and analytics platform for the people behind the recordings. I contributed to its design system, helping create a more consistent product experience and a reusable foundation for new features.">
 <script>var d=document.documentElement;try{localStorage.removeItem('theme');if(sessionStorage.getItem('theme')!=='dark')d.setAttribute('data-theme','light')}catch(e){d.setAttribute('data-theme','light')}</script>
+<script>if(!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('enter');setTimeout(function(){document.documentElement.classList.remove('enter')},5000)}</script>
 <link rel="canonical" href="https://www.antonshmatko.com/work/muso-ai">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Anton Shmatko">
@@ -46,7 +47,7 @@
   </header>
 
   <main>
-    <div class="wrap case-hero">
+    <div class="wrap case-hero" data-enter>
       <a class="label back" href="index.html"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true" width="14" height="14"><path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.5"/></svg>All work</a>
       <span class="label eyebrow">Case study · Music analytics</span>
       <h1>Muso.AI</h1>

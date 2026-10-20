@@ -6,6 +6,7 @@
 <meta name="description" content="Anton Shmatko — Senior Product Designer with 9 years of experience in SaaS, AI, Web3, marketplaces and enterprise platforms.">
 <title>Anton Shmatko — Senior Product Designer</title>
 <script>var d=document.documentElement;try{localStorage.removeItem('theme');if(sessionStorage.getItem('theme')!=='dark')d.setAttribute('data-theme','light')}catch(e){d.setAttribute('data-theme','light')}</script>
+<script>if(!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('enter');setTimeout(function(){document.documentElement.classList.remove('enter')},5000)}</script>
 <link rel="canonical" href="https://www.antonshmatko.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Anton Shmatko">
@@ -105,7 +106,7 @@ a.q-tag:hover { color: var(--fg); border-color: var(--fg); }
   </header>
 
   <main id="top">
-    <div class="wrap hero">
+    <div class="wrap hero" data-enter>
       <p class="label hero-name">Hi, I’m Anton Shmatko</p>
       <h1>Senior Product Designer. Designing clear, scalable experiences for complex SaaS, AI and Web3 products</h1>
 
@@ -118,7 +119,7 @@ a.q-tag:hover { color: var(--fg); border-color: var(--fg); }
 
     <section id="work">
       <div class="wrap">
-        <h2 class="sec-title">Selected work</h2>
+        <h2 class="sec-title reveal">Selected work</h2>
         <div class="works">
           <div class="col">
             <a class="work reveal" href="work/lumi-ai.html">
