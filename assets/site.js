@@ -160,8 +160,12 @@
     var root = document.documentElement;
     if (!root.classList.contains('enter')) return;
     var seq = [], t = 120;
-    var head = document.querySelectorAll('header.top .id, header.top nav.main > *');
-    head.forEach(function (el, i) { seq.push([el, 80 + i * 70]); });
+    // the logo shows at once (it writes itself); the menu comes in from the right: Say hello, theme, About, Work
+    var id = document.querySelector('header.top .id');
+    if (id) seq.push([id, 60]);
+    var nav = Array.prototype.slice.call(document.querySelectorAll('header.top nav.main > *')).reverse();
+    nav.forEach(function (el, i) { seq.push([el, 140 + i * 140]); });
+    var head = nav.concat(id ? [id] : []);
     var logo = document.querySelector('header.top .logo');
     if (logo) writeSignature(logo, 120);
     t = 80 + head.length * 70;
