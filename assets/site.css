@@ -147,20 +147,27 @@ html[data-theme="light"] .foot-cta { --fill-a: #1F5EFF; --fill-b: #3B82F6; }
 html[data-theme="light"] .foot-contacts { --hover: #1F5EFF; }
 .foot-chat:hover, .foot-chat:focus-visible, .foot-mail:hover, .foot-mail:focus-visible { color: var(--hover); }
 .foot-chat svg { width: 17px; height: 17px; }
-.foot-mail + .foot-chat { margin-left: clamp(8px, 2vw, 28px); } /* messengers sit a little apart from the email */
+/* the gap after the email holds its "Click to copy" hint */
+.foot-mail + .foot-chat { margin-left: 116px; }
 .foot-mail {
   position: relative; display: inline-flex; align-items: center; padding: 0;
   background: none; border: 0; color: var(--fg); font: 400 15px/1.4 var(--font-sans); cursor: copy; text-align: left;
   transition: color .2s;
 }
-/* the hint floats under the address, so it takes no room in the row */
+/* the hint floats just right of the address, in the gap before the messengers */
 .foot-mail-hint {
-  position: absolute; left: 0; top: calc(100% + 8px); pointer-events: none;
+  position: absolute; left: calc(100% + 12px); top: 50%; margin-top: -14px; pointer-events: none;
   font-size: 12px; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted);
-  opacity: 0; transform: translateY(-4px); transition: opacity .2s, transform .2s; white-space: nowrap;
+  opacity: 0; transform: translateX(-4px); transition: opacity .2s, transform .2s; white-space: nowrap;
 }
 .foot-mail:hover .foot-mail-hint, .foot-mail:focus-visible .foot-mail-hint, .foot-mail.copied .foot-mail-hint { opacity: 1; transform: none; }
 .foot-mail.copied .foot-mail-hint { color: var(--fg); border-color: var(--fg); }
+/* phones: the row wraps, so the hint goes under the address and the extra gap is dropped */
+@media (max-width: 760px) {
+  .foot-mail + .foot-chat { margin-left: 0; }
+  .foot-contacts { row-gap: 40px; }
+  .foot-mail-hint { left: 0; top: calc(100% + 8px); margin-top: 0; }
+}
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 .foot-bottom {
   display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 32px;
