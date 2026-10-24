@@ -142,11 +142,16 @@ html[data-theme="light"] .foot-cta { --fill-a: #1F5EFF; --fill-b: #3B82F6; }
 /* contact row under the big link: copyable email, then Telegram and WhatsApp */
 .foot-contacts { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; margin-top: clamp(20px, 3vw, 32px); }
 .foot-chat { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); text-decoration: none; font: 400 15px/1.4 var(--font-sans); transition: color .2s; }
-.foot-chat:hover, .foot-chat:focus-visible { color: var(--fg); }
+/* email, Telegram and WhatsApp light up in the same blue as the big link above */
+.foot-contacts { --hover: #5B8CFF; }
+html[data-theme="light"] .foot-contacts { --hover: #1F5EFF; }
+.foot-chat:hover, .foot-chat:focus-visible, .foot-mail:hover, .foot-mail:focus-visible { color: var(--hover); }
 .foot-chat svg { width: 17px; height: 17px; }
+.foot-mail + .foot-chat { margin-left: clamp(8px, 2vw, 28px); } /* messengers sit a little apart from the email */
 .foot-mail {
   position: relative; display: inline-flex; align-items: center; padding: 0;
   background: none; border: 0; color: var(--fg); font: 400 15px/1.4 var(--font-sans); cursor: copy; text-align: left;
+  transition: color .2s;
 }
 /* the hint floats under the address, so it takes no room in the row */
 .foot-mail-hint {
