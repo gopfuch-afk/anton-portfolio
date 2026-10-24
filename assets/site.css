@@ -139,13 +139,20 @@ html[data-theme="light"] .foot-cta { --fill-a: #1F5EFF; --fill-b: #3B82F6; }
   transition: transform .4s cubic-bezier(.22, .61, .36, 1), color .5s cubic-bezier(.22, .61, .36, 1);
 }
 .foot-cta:hover .foot-arrow, .foot-cta:focus-visible .foot-arrow { transform: translate(6px, -6px); color: var(--fill-a); }
+/* contact row under the big link: copyable email, then Telegram and WhatsApp */
+.foot-contacts { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; margin-top: clamp(20px, 3vw, 32px); }
+.foot-chat { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); text-decoration: none; font: 400 15px/1.4 var(--font-sans); transition: color .2s; }
+.foot-chat:hover, .foot-chat:focus-visible { color: var(--fg); }
+.foot-chat svg { width: 17px; height: 17px; }
 .foot-mail {
-  display: inline-flex; align-items: center; gap: 12px; margin-top: clamp(20px, 3vw, 32px); padding: 0;
+  position: relative; display: inline-flex; align-items: center; padding: 0;
   background: none; border: 0; color: var(--fg); font: 400 15px/1.4 var(--font-sans); cursor: copy; text-align: left;
 }
+/* the hint floats under the address, so it takes no room in the row */
 .foot-mail-hint {
+  position: absolute; left: 0; top: calc(100% + 8px); pointer-events: none;
   font-size: 12px; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted);
-  opacity: 0; transform: translateX(-4px); transition: opacity .2s, transform .2s; white-space: nowrap;
+  opacity: 0; transform: translateY(-4px); transition: opacity .2s, transform .2s; white-space: nowrap;
 }
 .foot-mail:hover .foot-mail-hint, .foot-mail:focus-visible .foot-mail-hint, .foot-mail.copied .foot-mail-hint { opacity: 1; transform: none; }
 .foot-mail.copied .foot-mail-hint { color: var(--fg); border-color: var(--fg); }
