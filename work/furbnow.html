@@ -60,9 +60,14 @@
       </dl>
 
       <figure class="case-cover">
-        <!-- cover: a muted looping preview in the usual 16:9 frame (the 4:3 video is cropped, anchored near the top);
+        <!-- cover: a muted looping preview shown whole at its own 4:3 (1600×1200);
              the poster is its first frame; 01.jpg stays the card image -->
-        <div class="frame video top" data-mode="preview" style="--ratio: 16 / 9" data-src="../media/furbnow/cover.mp4" data-poster="../media/furbnow/cover.jpg" aria-label="Furbnow — summary screen with EPC score and estimated improvements"></div>
+        <div class="frame video" data-mode="preview" style="--ratio: 4 / 3" data-src="../media/furbnow/cover.mp4" data-poster="../media/furbnow/cover.jpg" aria-label="Furbnow — summary screen with EPC score and estimated improvements"></div>
+      </figure>
+      <figure class="case-cover">
+        <div class="frame" style="--ratio: 16 / 9">
+          <img src="../media/furbnow/01.jpg" alt="Furbnow — product overview" loading="lazy">
+        </div>
       </figure>
     </div>
 

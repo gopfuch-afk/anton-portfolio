@@ -60,8 +60,13 @@
       </dl>
 
       <figure class="case-cover">
-        <div class="frame" style="--ratio: 16 / 9" data-hint="Cover image · 2400×1350 · JPG or WebP">
-          <img src="../media/mava-ai/01.jpg" alt="Mava AI — product overview" fetchpriority="high">
+        <!-- cover: a muted looping preview shown whole at its own 4:3 (1600×1200);
+             the poster is its first frame; 01.jpg follows below and stays the card image -->
+        <div class="frame video" data-mode="preview" style="--ratio: 4 / 3" data-src="../media/mava-ai/cover.mp4" data-poster="../media/mava-ai/cover.jpg" aria-label="Mava AI — support inbox with a conversation and ticket details"></div>
+      </figure>
+      <figure class="case-cover">
+        <div class="frame" style="--ratio: 16 / 9">
+          <img src="../media/mava-ai/01.jpg" alt="Mava AI — product overview" loading="lazy">
         </div>
       </figure>
     </div>

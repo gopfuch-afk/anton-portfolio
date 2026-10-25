@@ -318,7 +318,10 @@
           v.muted = true; v.loop = true; v.playsInline = true; v.preload = 'auto';
           v.setAttribute('muted', ''); v.setAttribute('playsinline', ''); v.setAttribute('aria-hidden', 'true');
           v.src = media.getAttribute('data-video');
-          v.addEventListener('playing', function () { media.classList.add('playing'); });
+          // show it once frames are moving ('playing' alone can be missed)
+          var show = function () { if (!v.paused) media.classList.add('playing'); };
+          v.addEventListener('playing', show);
+          v.addEventListener('timeupdate', show);
           media.appendChild(v);
         }
         var p = v.play(); if (p && p.catch) p.catch(function () {});
