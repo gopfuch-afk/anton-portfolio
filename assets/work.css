@@ -61,5 +61,24 @@
   .work .media .mock, .work .media img { transition: none; }
 }
 
-/* link under the home selection to the full list of cases */
-.all-work { margin-top: clamp(40px, 6vw, 72px); font-size: clamp(1.05rem, 1.4vw, 1.25rem); }
+
+/* home "Selected work" on wide screens: one case per screen (below the header), the image on the left and
+   the text centred beside it */
+@media (min-width: 901px) {
+  #work:has(.works.stack) { padding-block: 0; } /* each case fills its own screen */
+  .works.stack { display: flex; flex-direction: column; gap: 0; }
+  .works.stack .col { display: contents; }
+  .works.stack .col:nth-child(2) { padding-top: 0; }
+  .works.stack .col:nth-child(1) .work:nth-child(1) { order: 1; }
+  .works.stack .col:nth-child(2) .work:nth-child(1) { order: 2; }
+  .works.stack .col:nth-child(1) .work:nth-child(2) { order: 3; }
+  .works.stack .col:nth-child(2) .work:nth-child(2) { order: 4; }
+  .works.stack .work {
+    display: grid; grid-template-columns: min(62%, calc((100vh - 140px) * 4 / 3)) minmax(0, 1fr);
+    gap: clamp(32px, 5vw, 80px); align-items: center; min-height: calc(100vh - 72px);
+  }
+  .works.stack .work .meta { flex-direction: column; gap: 6px; margin-top: 0; }
+  .works.stack .work .meta b { font-size: clamp(1.75rem, 2.6vw, 2.5rem); }
+  .works.stack .work p { margin-top: 16px; }
+  .works.stack .work .work-cta { margin-top: 24px; }
+}

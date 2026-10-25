@@ -347,6 +347,42 @@
     }
   })();
 
+  // home page on wide screens with a mouse wheel or trackpad: the page moves screen by screen. One scroll
+  // step goes to the next stop: the hero, each case, Kind words (each centred under the header, or at its top
+  // when taller than the screen) and the footer at the very end
+  (function () {
+    var box = document.querySelector('[data-snap]');
+    if (!box) return;
+    var wide = window.matchMedia('(min-width: 901px)'), HEADER = 72, busy = false, started = 0, lastWheel = 0;
+    function targets() {
+      var room = window.innerHeight - HEADER;
+      // layout positions (offsetTop), so a card still sliding in on reveal does not shift its stop
+      return [].slice.call(document.querySelectorAll('[data-snap] .work, [data-snap-stop]')).map(function (part) {
+        for (var top = 0, el = part; el; el = el.offsetParent) top += el.offsetTop;
+        return Math.round(top - HEADER - Math.max(0, (room - part.offsetHeight) / 2));
+      }).concat(0, document.documentElement.scrollHeight - window.innerHeight) // the top and the very bottom
+        .sort(function (a, b) { return a - b; });
+    }
+    window.addEventListener('wheel', function (e) {
+      if (!wide.matches || e.ctrlKey || Math.abs(e.deltaY) < Math.abs(e.deltaX)) return;
+      var now = Date.now();
+      if (busy) {
+        // swallow the rest of the gesture (trackpad momentum) until the move is done and the wheel is quiet
+        if (now - started < 700 || now - lastWheel < 160) { lastWheel = now; e.preventDefault(); return; }
+        busy = false;
+      }
+      lastWheel = now;
+      var y = window.scrollY, t = targets(), to = null, i;
+      if (e.deltaY > 0) { for (i = 0; i < t.length; i++) if (t[i] > y + 2) { to = t[i]; break; } }
+      else { for (i = t.length - 1; i >= 0; i--) if (t[i] < y - 2) { to = t[i]; break; } }
+      // only within the cases: the next stop must be less than a screen away
+      if (to === null || Math.abs(to - y) > window.innerHeight) return;
+      e.preventDefault();
+      busy = true; started = now;
+      window.scrollTo({ top: to, behavior: reduce ? 'auto' : 'smooth' });
+    }, { passive: false });
+  })();
+
   // reveal on scroll
   var items = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window) {

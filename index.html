@@ -42,6 +42,13 @@
 @media (max-width: 860px) { .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .facts .label { display: block; margin-bottom: 6px; }
 .facts p { font-size: 15px; }
+/* wide screens: the hero fills the first screen, like each case below it */
+@media (min-width: 901px) {
+  .hero { min-height: calc(100vh - 72px); /* below the header */ box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; }
+  /* Kind words fills its screen too: a stop of the screen-by-screen scroll (site.js) */
+  #kind-words { min-height: calc(100vh - 72px); padding-block: clamp(24px, 4vh, 56px); box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; }
+  #kind-words > .wrap { width: 100%; box-sizing: border-box; }
+}
 
 /* kind words */
 .q-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px 48px; margin-bottom: clamp(32px, 4vw, 56px); }
@@ -119,24 +126,28 @@ a.q-tag:hover { color: var(--fg); border-color: var(--fg); }
 
     <section id="work">
       <div class="wrap">
-        <h2 class="sec-title reveal">Selected work</h2>
-        <div class="works">
+        <h2 class="sr-only">Selected work</h2>
+        <!-- wide screens: one case per screen, image on the left and text on the right (work.css);
+             each wheel step moves to the next case, the hero above counts as the first stop (site.js) -->
+        <div class="works stack" data-snap>
           <div class="col">
             <a class="work reveal" href="work/lumi-ai.html">
               <div class="media r43" data-video="media/lumi-ai/cover.mp4" data-autoplay style="--g: linear-gradient(135deg, #2347F5, #7F95FF)">
                 <img src="media/lumi-ai/cover.jpg" alt="Lumi AI analytics workspace" loading="lazy">
               </div>
+              <div class="info">
               <div class="meta"><b>Lumi AI</b><span>AI analytics</span></div>
               <p>An AI-powered analytics platform that turns complex business data into actionable insights through conversational AI, interactive dashboards, and connected knowledge sources.</p>
-              <span class="work-cta">View case study <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg></span>
+              <span class="work-cta">View case study <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg></span></div>
             </a>
             <a class="work reveal" href="work/furbnow.html">
               <div class="media r43" data-video="media/furbnow/cover.mp4" data-autoplay style="--g: linear-gradient(150deg, #14532D, #22C55E 60%, #D9F99D)">
                 <img src="media/furbnow/cover.jpg" alt="Furbnow home energy platform" loading="lazy">
               </div>
+              <div class="info">
               <div class="meta"><b>Furbnow</b><span>Home energy</span></div>
               <p>A home energy platform that helps homeowners plan and manage energy-saving improvements, making complex renovation decisions easier to understand.</p>
-              <span class="work-cta">View case study <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg></span>
+              <span class="work-cta">View case study <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg></span></div>
             </a>
           </div>
           <div class="col">
@@ -144,26 +155,26 @@ a.q-tag:hover { color: var(--fg); border-color: var(--fg); }
               <div class="media r43" data-video="media/mava-ai/card.mp4" data-autoplay style="--g: linear-gradient(140deg, #4C1D95, #7C3AED 55%, #E3C8FF)">
                 <img src="media/mava-ai/card.jpg" alt="Mava AI support inbox" loading="lazy">
               </div>
+              <div class="info">
               <div class="meta"><b>Mava AI</b><span>AI support</span></div>
               <p>An AI-powered customer support platform that brings conversations into one workspace, helping teams automate common questions and manage support across multiple channels.</p>
-              <span class="work-cta">View case study <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg></span>
+              <span class="work-cta">View case study <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg></span></div>
             </a>
             <a class="work reveal" href="work/falc-ai.html">
               <div class="media r43" data-video="media/falc-ai/cover.mp4" data-autoplay style="--g: linear-gradient(150deg, #E9EAEC, #C9CCD1)">
                 <img src="media/falc-ai/cover.jpg" alt="Falc AI" loading="lazy" onerror="this.remove()">
               </div>
+              <div class="info">
               <div class="meta"><b>Falc AI</b><span>Retail analytics</span></div>
               <p>An AI-powered retail analytics product that helps teams understand store performance, explore data, and identify opportunities for improvement.</p>
-              <span class="work-cta">View case study <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg></span>
+              <span class="work-cta">View case study <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg></span></div>
             </a>
           </div>
         </div>
-        <!-- the home page shows a selection; every case is on /work -->
-        <a class="work-cta all-work" href="work/index.html">View all work <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg></a>
       </div>
     </section>
 
-    <section id="kind-words" data-ripple-color aria-roledescription="carousel" aria-label="Kind words">
+    <section id="kind-words" data-snap-stop data-ripple-color aria-roledescription="carousel" aria-label="Kind words">
       <div class="wrap">
         <div class="q-head">
           <h2 class="sec-title">Kind <span class="accent">words</span></h2>
