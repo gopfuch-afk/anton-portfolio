@@ -277,10 +277,15 @@
           sg.putImageData(out, 0, 0);
           vg.clearRect(0, 0, view.width, view.height);
           vg.drawImage(src, 0, 0, view.width, view.height);
+          if (done) return;
           if (kk < 1) requestAnimationFrame(frame);
-          else { view.remove(); logo.classList.remove('writing'); } // back to the theme-aware mask
+          else finish();
         }
+        var done = false;
+        function finish() { if (done) return; done = true; view.remove(); logo.classList.remove('writing'); } // back to the theme-aware mask
         setTimeout(function () { requestAnimationFrame(frame); }, delay);
+        // if frames never come (a tab opened in the background, a headless render), show the signature anyway
+        setTimeout(finish, delay + DUR + 2500);
       };
       img.src = m[1];
     }
@@ -301,6 +306,30 @@
       });
     }
   })();
+
+  // case cards with a preview video: it plays while the card is hovered (mouse only);
+  // the file is fetched on the first hover, and the cover image stays until frames arrive
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches && !reduce) {
+    document.querySelectorAll('.work .media[data-video]').forEach(function (media) {
+      var card = media.closest('.work') || media, v = null;
+      card.addEventListener('mouseenter', function () {
+        if (!v) {
+          v = document.createElement('video');
+          v.muted = true; v.loop = true; v.playsInline = true; v.preload = 'auto';
+          v.setAttribute('muted', ''); v.setAttribute('playsinline', ''); v.setAttribute('aria-hidden', 'true');
+          v.src = media.getAttribute('data-video');
+          v.addEventListener('playing', function () { media.classList.add('playing'); });
+          media.appendChild(v);
+        }
+        var p = v.play(); if (p && p.catch) p.catch(function () {});
+      });
+      card.addEventListener('mouseleave', function () {
+        if (!v) return;
+        media.classList.remove('playing');
+        v.pause();
+      });
+    });
+  }
 
   // reveal on scroll
   var items = document.querySelectorAll('.reveal');

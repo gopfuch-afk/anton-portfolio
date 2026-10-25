@@ -48,6 +48,8 @@ figcaption { margin-top: 12px; font-size: 13px; color: var(--muted); }
 .frame { position: relative; aspect-ratio: var(--ratio, 16 / 10); border-radius: 4px; overflow: hidden; background: var(--surface); }
 .frame > img, .frame > video, .frame > .poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .frame.contain > img, .frame.contain > video, .frame.contain > .poster { object-fit: contain; }
+/* crop anchored near the top (keeps an app header in view when a taller video fills a 16:9 frame) */
+.frame.top > img, .frame.top > video, .frame.top > .poster { object-position: 50% 10%; }
 .frame.is-missing > img, .frame.no-poster > .poster { display: none; }
 
 /* explicit placeholder, shown only while the file is missing */
