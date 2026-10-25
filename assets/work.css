@@ -32,6 +32,7 @@
 }
 .work .media.playing video { opacity: 1; }
 .work .media.top video { object-position: 50% 10%; } /* keep an app header in view */
+.work .media.r43 { aspect-ratio: 4 / 3; } /* cards that loop a 1600×1200 video use its proportions */
 .work:hover .media video { transform: scale(1.04); }
 .work .meta { display: flex; justify-content: space-between; gap: 16px; align-items: baseline; margin-top: 20px; font-size: 15px; }
 .work .meta b { font-weight: 500; font-size: clamp(1.375rem, 2vw, 1.75rem); line-height: 1.15; letter-spacing: -0.02em; }

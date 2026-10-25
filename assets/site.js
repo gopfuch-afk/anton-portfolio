@@ -307,32 +307,45 @@
     }
   })();
 
-  // case cards with a preview video: it plays while the card is hovered (mouse only);
-  // the file is fetched on the first hover, and the cover image stays until frames arrive
-  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches && !reduce) {
-    document.querySelectorAll('.work .media[data-video]').forEach(function (media) {
-      var card = media.closest('.work') || media, v = null;
-      card.addEventListener('mouseenter', function () {
-        if (!v) {
-          v = document.createElement('video');
-          v.muted = true; v.loop = true; v.playsInline = true; v.preload = 'auto';
-          v.setAttribute('muted', ''); v.setAttribute('playsinline', ''); v.setAttribute('aria-hidden', 'true');
-          v.src = media.getAttribute('data-video');
-          // show it once frames are moving ('playing' alone can be missed)
-          var show = function () { if (!v.paused) media.classList.add('playing'); };
-          v.addEventListener('playing', show);
-          v.addEventListener('timeupdate', show);
-          media.appendChild(v);
-        }
-        var p = v.play(); if (p && p.catch) p.catch(function () {});
-      });
-      card.addEventListener('mouseleave', function () {
-        if (!v) return;
-        media.classList.remove('playing');
-        v.pause();
-      });
+  // case cards with a preview video. With data-autoplay it loops (muted) whenever the card is on
+  // screen and pauses off screen; otherwise it plays while the card is hovered (mouse only).
+  // Nothing downloads until the card is near the view or hovered; the still image shows until frames arrive.
+  (function () {
+    var cards = document.querySelectorAll('.work .media[data-video]');
+    if (!cards.length || reduce) return;
+    var saveData = navigator.connection && navigator.connection.saveData;
+    var canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    function videoFor(media) {
+      var v = media.querySelector('video');
+      if (v) return v;
+      v = document.createElement('video');
+      v.muted = true; v.loop = true; v.playsInline = true; v.preload = 'auto';
+      v.setAttribute('muted', ''); v.setAttribute('playsinline', ''); v.setAttribute('aria-hidden', 'true');
+      v.src = media.getAttribute('data-video');
+      // show it once frames are moving ('playing' alone can be missed)
+      var show = function () { if (!v.paused) media.classList.add('playing'); };
+      v.addEventListener('playing', show);
+      v.addEventListener('timeupdate', show);
+      media.appendChild(v);
+      return v;
+    }
+    function play(media) { var p = videoFor(media).play(); if (p && p.catch) p.catch(function () {}); }
+    function stop(media) { var v = media.querySelector('video'); if (v) { v.pause(); media.classList.remove('playing'); } }
+    var auto = [];
+    cards.forEach(function (media) {
+      if (media.hasAttribute('data-autoplay') && !saveData) { auto.push(media); return; }
+      if (!canHover) return;
+      var card = media.closest('.work') || media;
+      card.addEventListener('mouseenter', function () { play(media); });
+      card.addEventListener('mouseleave', function () { stop(media); });
     });
-  }
+    if (auto.length && 'IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) play(e.target); else { var v = e.target.querySelector('video'); if (v) v.pause(); } });
+      }, { rootMargin: '150px 0px' });
+      auto.forEach(function (m) { io.observe(m); });
+    }
+  })();
 
   // reveal on scroll
   var items = document.querySelectorAll('.reveal');
