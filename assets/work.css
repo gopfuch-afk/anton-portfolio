@@ -77,6 +77,9 @@
     display: grid; grid-template-columns: min(62%, calc((100vh - 140px) * 4 / 3)) minmax(0, 1fr);
     gap: clamp(32px, 5vw, 80px); align-items: center; min-height: calc(100vh - 72px);
   }
+  /* the row fills the screen, but only the image and the text react to the pointer (hover and click) */
+  .works.stack .work { pointer-events: none; }
+  .works.stack .work :is(.media, .info) { pointer-events: auto; }
   .works.stack .work .meta { flex-direction: column; gap: 6px; margin-top: 0; }
   .works.stack .work .meta b { font-size: clamp(1.75rem, 2.6vw, 2.5rem); }
   .works.stack .work p { margin-top: 16px; }
