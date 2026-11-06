@@ -15,6 +15,7 @@
   .works .col:nth-child(2) .work:nth-child(3) { order: 6; }
   .works .col:nth-child(1) .work:nth-child(4) { order: 7; }
   .works .col:nth-child(2) .work:nth-child(4) { order: 8; }
+  .works .col:nth-child(1) .work:nth-child(5) { order: 9; }
 }
 .work { text-decoration: none; display: block; }
 .work .media {
