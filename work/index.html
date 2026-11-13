@@ -28,6 +28,15 @@
 .page-hero { padding-block: clamp(32px, 6vw, 72px) clamp(40px, 6vw, 80px); }
 .page-hero h1 { font-size: clamp(2.6rem, 6.4vw, 5.76rem); line-height: 1; letter-spacing: -0.04em; margin-top: 18px; }
 .page-hero p { color: var(--muted); font-size: clamp(1.0625rem, 1.6vw, 1.25rem); line-height: 1.5; max-width: 36em; margin-top: 24px; }
+/* filter tabs (site.js): All, Product design, Branding */
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin-top: clamp(28px, 4vw, 40px); }
+.filter {
+  height: 40px; padding: 0 18px; border-radius: 999px; border: 1px solid var(--line); background: transparent;
+  font: inherit; font-size: 15px; color: var(--muted); cursor: pointer; transition: color .2s, border-color .2s, background .2s;
+}
+.filter:hover { color: var(--fg); border-color: var(--fg); }
+.filter[aria-pressed="true"] { background: var(--fg); border-color: var(--fg); color: var(--bg); }
+.works .work[hidden] { display: none; }
 .work-list { padding-top: 0; padding-bottom: clamp(64px, 9vw, 120px); } /* the intro above already leaves the room */
 </style>
 </head>
@@ -51,13 +60,18 @@
       <span class="label">Work</span>
       <h1>Selected <span class="accent">case studies</span></h1>
       <p>Product design for AI, SaaS and consumer platforms — from conversational analytics to customer support, home energy and music.</p>
+      <div class="filters" role="group" aria-label="Filter case studies" data-filter>
+        <button class="filter" type="button" data-show="all" aria-pressed="true">All</button>
+        <button class="filter" type="button" data-show="product" aria-pressed="false">Product design</button>
+        <button class="filter" type="button" data-show="branding" aria-pressed="false">Branding</button>
+      </div>
     </div>
 
     <section class="work-list" aria-label="Case studies">
       <div class="wrap">
         <div class="works">
           <div class="col">
-            <a class="work reveal" href="../work/lumi-ai.html">
+            <a class="work reveal" href="../work/lumi-ai.html" data-cat="product">
               <div class="media r43" data-video="../media/lumi-ai/cover.mp4" data-autoplay style="--g: linear-gradient(135deg, #2347F5, #7F95FF)">
                 <img src="../media/lumi-ai/cover.jpg" alt="Lumi AI analytics workspace" loading="lazy">
               </div>
@@ -65,7 +79,7 @@
               <p>An AI-powered analytics platform that turns complex business data into actionable insights through conversational AI, interactive dashboards, and connected knowledge sources.</p>
               <span class="work-cta">View case study <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg></span>
             </a>
-            <a class="work reveal" href="../work/furbnow.html">
+            <a class="work reveal" href="../work/furbnow.html" data-cat="product">
               <div class="media r43" data-video="../media/furbnow/cover.mp4" data-autoplay style="--g: linear-gradient(150deg, #14532D, #22C55E 60%, #D9F99D)">
                 <img src="../media/furbnow/cover.jpg" alt="Furbnow home energy platform" loading="lazy">
               </div>
@@ -73,7 +87,7 @@
               <p>A home energy platform that helps homeowners plan and manage energy-saving improvements, making complex renovation decisions easier to understand.</p>
               <span class="work-cta">View case study <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg></span>
             </a>
-            <a class="work reveal" href="../work/falc-ai.html">
+            <a class="work reveal" href="../work/falc-ai.html" data-cat="product">
               <div class="media r43" data-video="../media/falc-ai/cover.mp4" data-autoplay style="--g: linear-gradient(150deg, #E9EAEC, #C9CCD1)">
                 <img src="../media/falc-ai/cover.jpg" alt="Falc AI" loading="lazy" onerror="this.remove()">
               </div>
@@ -81,7 +95,7 @@
               <p>An AI-powered retail analytics product that helps teams understand store performance, explore data, and identify opportunities for improvement.</p>
               <span class="work-cta">View case study <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg></span>
             </a>
-            <a class="work reveal" href="../work/trumpet.html">
+            <a class="work reveal" href="../work/trumpet.html" data-cat="product">
               <div class="media r43" style="--g: linear-gradient(150deg, #E9EAEC, #C9CCD1)">
                 <img src="../media/trumpet/card.webp" alt="Trumpet" loading="lazy">
               </div>
@@ -89,19 +103,18 @@
               <p>A B2B sales collaboration platform that brings content, conversations, and next steps into shared digital workspaces, helping buyers and sellers move deals forward.</p>
               <span class="work-cta">View case study <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg></span>
             </a>
-            <!-- Sprava case is hidden for now: uncomment to show it again
-            <a class="work reveal" href="../work/sprava.html">
+            <a class="work reveal" href="../work/sprava.html" data-cat="branding">
               <div class="media r43" style="--g: linear-gradient(150deg, #1F3A2B, #2E5A3F 55%, #C9D98A)">
-                <img src="../media/sprava/card.jpg" alt="Sprava business cards in forest green with the lime logo" loading="lazy">
+                <img src="../media/sprava/card.jpg" alt="Sprava logo in Soft Lime on Forest green" loading="lazy">
+                <div data-sprava-logo aria-hidden="true"></div>
               </div>
               <div class="meta"><b>Sprava</b><span>Branding</span></div>
               <p>A brand identity for a Kyiv real estate agency: a corner sign, a forest and lime palette, and a brandbook that carries it from business cards to billboards.</p>
               <span class="work-cta">View case study <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg></span>
             </a>
-            -->
           </div>
           <div class="col">
-            <a class="work reveal" href="../work/mava-ai.html">
+            <a class="work reveal" href="../work/mava-ai.html" data-cat="product">
               <div class="media r43" data-video="../media/mava-ai/card.mp4" data-autoplay style="--g: linear-gradient(140deg, #4C1D95, #7C3AED 55%, #E3C8FF)">
                 <img src="../media/mava-ai/card.jpg" alt="Mava AI support inbox" loading="lazy">
               </div>
@@ -109,7 +122,7 @@
               <p>An AI-powered customer support platform that brings conversations into one workspace, helping teams automate common questions and manage support across multiple channels.</p>
               <span class="work-cta">View case study <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg></span>
             </a>
-            <a class="work reveal" href="../work/muso-ai.html">
+            <a class="work reveal" href="../work/muso-ai.html" data-cat="product">
               <div class="media r43" style="--g: linear-gradient(150deg, #FFF1EC, #FF8A65 60%, #BE185D)">
                 <img src="../media/muso-ai/card.webp" alt="Muso.AI music credits and analytics" loading="lazy">
               </div>
@@ -117,7 +130,7 @@
               <p>A music credits and analytics platform that helps music professionals showcase their work, explore collaborations, and track the performance of their credited releases.</p>
               <span class="work-cta">View case study <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg></span>
             </a>
-            <a class="work reveal" href="../work/ultimate-champions.html">
+            <a class="work reveal" href="../work/ultimate-champions.html" data-cat="product">
               <div class="media r43" style="--g: linear-gradient(150deg, #E9EAEC, #C9CCD1)">
                 <img src="../media/ultimate-champions/card.jpg" alt="Ultimate Champions" loading="lazy" onerror="this.remove()">
               </div>
@@ -125,7 +138,7 @@
               <p>A fantasy sports gaming platform where fans collect digital player cards, build teams, and compete based on real-world football and basketball performances.</p>
               <span class="work-cta">View case study <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg></span>
             </a>
-            <a class="work reveal" href="../work/riicha.html">
+            <a class="work reveal" href="../work/riicha.html" data-cat="product">
               <div class="media r43" data-video="../media/riicha/cover.mp4" data-autoplay style="--g: linear-gradient(150deg, #3B0A4F, #6D28D9)">
                 <img src="../media/riicha/cover.jpg" alt="Riicha sales CRM leads list" loading="lazy">
               </div>
@@ -174,6 +187,7 @@
 </div>
 
 <script src="../assets/site.js"></script>
+<script src="../assets/sprava-logo.js"></script>
 <script src="../assets/ripple.js"></script>
 </body>
 </html>

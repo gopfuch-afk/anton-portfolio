@@ -383,6 +383,20 @@
     }, { passive: false });
   })();
 
+  // Work page filters: show all cases, or only those whose data-cat matches the pressed button
+  (function () {
+    var group = document.querySelector('[data-filter]');
+    if (!group) return;
+    var buttons = group.querySelectorAll('.filter'), cards = document.querySelectorAll('.works .work[data-cat]');
+    group.addEventListener('click', function (e) {
+      var btn = e.target.closest('.filter');
+      if (!btn) return;
+      var show = btn.getAttribute('data-show');
+      buttons.forEach(function (b) { b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'); });
+      cards.forEach(function (card) { card.hidden = show !== 'all' && card.getAttribute('data-cat') !== show; });
+    });
+  })();
+
   // reveal on scroll
   var items = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window) {
