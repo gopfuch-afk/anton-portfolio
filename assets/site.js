@@ -383,7 +383,7 @@
     }, { passive: false });
   })();
 
-  // Work page filters: show all cases, or only those whose data-cat matches the pressed button
+  // Work page filters: show all cases, or only those whose data-cat (a space-separated list) has the pressed one
   (function () {
     var group = document.querySelector('[data-filter]');
     if (!group) return;
@@ -393,7 +393,7 @@
       if (!btn) return;
       var show = btn.getAttribute('data-show');
       buttons.forEach(function (b) { b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'); });
-      cards.forEach(function (card) { card.hidden = show !== 'all' && card.getAttribute('data-cat') !== show; });
+      cards.forEach(function (card) { card.hidden = show !== 'all' && card.getAttribute('data-cat').split(' ').indexOf(show) < 0; });
     });
   })();
 
