@@ -283,3 +283,44 @@ html.enter header.top .on, html.enter [data-enter] > .on, html.enter [data-enter
   .sp-letter { transform: none; }
   .is-play .sp-mark, .is-play .sp-letter { animation: none; }
 }
+
+/* About: the tools behind the site under the headline; on load they pop in one by one once the heading
+   has settled (data-enter-at in about.html), and the rest of the page follows */
+.made-with { display: flex; align-items: center; gap: 10px; margin-top: clamp(24px, 3vw, 36px); }
+/* each logo sits small in an outlined circle; on hover it takes its brand colour and shows its name */
+.tool { position: relative; display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 50%; box-sizing: border-box; }
+.tool i {
+  position: relative; z-index: 1; display: block; width: 16px; height: 16px; background: var(--fg); /* one colour: black, or white in the dark theme */
+  -webkit-mask: var(--icon) center / contain no-repeat; mask: var(--icon) center / contain no-repeat;
+  transition: background-color .25s, opacity .25s;
+}
+.tool:hover i { background-color: var(--brand, var(--fg)); }
+/* Figma: the full-colour mark sits on top of the one-colour one and fades in */
+.tool.figma img { position: absolute; left: 50%; top: 50%; z-index: 2; height: 16px; transform: translate(-50%, -50%); opacity: 0; transition: opacity .25s; }
+.tool.figma:hover img { opacity: 1; }
+.tool.figma:hover i { opacity: 0; }
+.tool.ae b { /* the lilac letters show through the dark square */
+  position: absolute; left: 50%; top: 50%; width: 12px; height: 12px; margin: -6px 0 0 -6px; background: #9999FF; opacity: 0; transition: opacity .25s;
+}
+.tool.ae:hover b { opacity: 1; }
+.tool::after {
+  content: attr(data-name); position: absolute; left: 50%; bottom: calc(100% + 7px); transform: translate(-50%, 4px);
+  padding: 4px 8px; border-radius: 999px; background: var(--fg); color: var(--bg); font-size: 11px; line-height: 1.1; white-space: nowrap;
+  opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s;
+}
+/* the tooltip's arrow, pointing down at the logo */
+.tool::before {
+  content: ""; position: absolute; left: 50%; bottom: calc(100% + 3px); width: 0; height: 0; transform: translate(-50%, 4px);
+  border: 4px solid transparent; border-bottom: 0; border-top-color: var(--fg);
+  opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s;
+}
+.tool:hover::after, .tool:hover::before { opacity: 1; transform: translate(-50%, 0); }
+html.enter [data-enter] > .made-with { transform: none; }
+html.enter .made-with .tool {
+  opacity: 0; transform: translateY(12px) scale(.6);
+  transition: opacity .4s ease, transform .55s cubic-bezier(.34, 1.56, .64, 1);
+}
+html.enter .made-with .tool:nth-child(2) { transition-delay: .12s; }
+html.enter .made-with .tool:nth-child(3) { transition-delay: .24s; }
+html.enter .made-with .tool:nth-child(4) { transition-delay: .36s; }
+html.enter .made-with.on .tool { opacity: 1; transform: none; }

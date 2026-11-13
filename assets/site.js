@@ -173,13 +173,17 @@
       Array.prototype.forEach.call(box.children, function (el, i) {
         if (el.classList.contains('reveal')) return;
         if (/^H1$/.test(el.tagName)) splitWords(el);
-        seq.push([el, t + Math.min(i, 8) * 110]);
+        // data-enter-at: a fixed start (ms) for an item that should wait, e.g. until the heading has settled
+        var at = el.getAttribute('data-enter-at');
+        seq.push([el, at ? +at : t + Math.min(i, 8) * 110, +(el.getAttribute('data-enter-hold') || 0)]);
       });
     });
     seq.forEach(function (p) { setTimeout(function () { p[0].classList.add('on'); }, p[1]); });
     // after the last item has settled, drop the entrance styles altogether
-    var lastAt = seq.length ? seq[seq.length - 1][1] : 0;
-    enterUntil = Date.now() + lastAt + 250;
+    // data-enter-hold: how long the item takes to play out, so scroll reveals in view wait for it too
+    var lastAt = 0, hold = 0;
+    seq.forEach(function (p) { if (p[1] >= lastAt) { lastAt = p[1]; hold = p[2] || 0; } });
+    enterUntil = Date.now() + lastAt + 250 + hold;
     setTimeout(function () { root.classList.remove('enter'); }, lastAt + 1600);
 
     // the signature writes itself, letter by letter: S, h, m, a, t (stem, then bar), k, o with its tail,
