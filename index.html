@@ -55,13 +55,19 @@ html.enter [data-enter] > h1 .h-tools.w { display: inline-flex; }
   transition: opacity .25s ease 2.5s, transform .45s cubic-bezier(.34, 1.56, .64, 1) 2.5s;
 }
 html.enter .h-badge { opacity: 0; transform: scale(.4); }
+/* impact in numbers: a big figure over a short caption, divided by thin lines */
 .facts {
-  display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: 28px clamp(40px, 6vw, 96px);
-  margin-top: clamp(40px, 6vw, 80px);
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: clamp(40px, 6vw, 72px) 0 0; max-width: 1040px;
+  border-top: 1px solid var(--line);
 }
-@media (max-width: 860px) { .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-.facts .label { display: block; margin-bottom: 6px; }
-.facts p { font-size: 15px; }
+.facts > div { padding: clamp(18px, 2.4vw, 28px) clamp(16px, 2.4vw, 32px) 0 0; }
+.facts > div + div { padding-left: clamp(16px, 2.4vw, 32px); border-left: 1px solid var(--line); }
+.facts dt { font-size: clamp(2.25rem, 4vw, 3.5rem); line-height: 1; letter-spacing: -0.03em; }
+.facts dd { margin: 10px 0 0; max-width: 18em; font-size: 15px; line-height: 1.45; color: var(--muted); }
+@media (max-width: 760px) {
+  .facts { grid-template-columns: minmax(0, 1fr); }
+  .facts > div + div { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); margin-top: 18px; }
+}
 /* wide screens: the hero fills the first screen, like each case below it */
 @media (min-width: 901px) {
   .hero { min-height: calc(100vh - 72px); /* below the header */ box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; }
@@ -136,11 +142,12 @@ a.q-tag:hover { color: var(--fg); border-color: var(--fg); }
     <div class="wrap hero" data-enter>
       <h1>Senior <span class="h-avatar w" style="--d: 30ms"><img src="assets/anton.webp" alt="Anton Shmatko" width="320" height="320"><svg class="h-badge" viewBox="0 0 24 24" aria-hidden="true"><path fill="#2F7CF6" d="M21.60 12.00Q23.68 15.13 20.31 16.80Q20.55 20.55 16.80 20.31Q15.13 23.68 12.00 21.60Q8.87 23.68 7.20 20.31Q3.45 20.55 3.69 16.80Q0.32 15.13 2.40 12.00Q0.32 8.87 3.69 7.20Q3.45 3.45 7.20 3.69Q8.87 0.32 12.00 2.40Q15.13 0.32 16.80 3.69Q20.55 3.45 20.31 7.20Q23.68 8.87 21.60 12.00Z"/><path d="M8 12.3l2.6 2.6 5.4-5.6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Product Designer. Designing clear, scalable experiences <span class="h-tools w" style="--d: 330ms" role="img" aria-label="Made with Claude and Figma"><img src="assets/icons/app-claude.svg" alt="" width="64" height="64"><img src="assets/icons/app-figma.svg" alt="" width="64" height="64"></span> for complex SaaS, AI and Web3 products</h1>
 
-      <div class="facts">
-        <div><span class="label">Domains</span><p>SaaS, AI, Web3, Marketplaces, Enterprise</p></div>
-        <div><span class="label">Focus</span><p>Product Design, UX/UI, Design Systems, Motion Design</p></div>
-        <div><span class="label">Experience</span><p>9 years, web &amp; mobile</p></div>
-      </div>
+      <!-- impact in numbers -->
+      <dl class="facts">
+        <div><dt>$20M+</dt><dd>raised by the startups I’ve designed products for</dd></div>
+        <div><dt>2×</dt><dd>sign-up conversion on products I redesigned</dd></div>
+        <div><dt>9+</dt><dd>years designing web &amp; mobile products for SaaS, AI and Web3</dd></div>
+      </dl>
     </div>
 
     <section id="work">
@@ -157,6 +164,7 @@ a.q-tag:hover { color: var(--fg); border-color: var(--fg); }
               <div class="info">
               <div class="meta"><b>Lumi AI</b><span>AI analytics</span></div>
               <p>An AI-powered analytics platform that turns complex business data into actionable insights through conversational AI, interactive dashboards, and connected knowledge sources.</p>
+              <dl class="work-stats"><div><dt>$3.7M</dt><dd>raised</dd></div><div><dt>Acquired</dt><dd>late 2026</dd></div></dl>
               <span class="work-cta">View case study <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg></span></div>
             </a>
             <a class="work reveal" href="work/furbnow.html">
@@ -166,6 +174,7 @@ a.q-tag:hover { color: var(--fg); border-color: var(--fg); }
               <div class="info">
               <div class="meta"><b>Furbnow</b><span>Home energy</span></div>
               <p>A home energy platform that helps homeowners plan and manage energy-saving improvements, making complex renovation decisions easier to understand.</p>
+              <dl class="work-stats"><div><dt>£3.45M</dt><dd>raised · pre-seed &amp; seed</dd></div></dl>
               <span class="work-cta">View case study <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg></span></div>
             </a>
           </div>
@@ -177,6 +186,7 @@ a.q-tag:hover { color: var(--fg); border-color: var(--fg); }
               <div class="info">
               <div class="meta"><b>Mava AI</b><span>AI support</span></div>
               <p>An AI-powered customer support platform that brings conversations into one workspace, helping teams automate common questions and manage support across multiple channels.</p>
+              <dl class="work-stats"><div><dt>$1.4M</dt><dd>raised</dd></div></dl>
               <span class="work-cta">View case study <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg></span></div>
             </a>
             <a class="work reveal" href="work/falc-ai.html">

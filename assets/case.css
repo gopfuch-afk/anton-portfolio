@@ -16,7 +16,7 @@ figure { margin: 0; }
   color: var(--muted); max-width: 40em; margin-top: 24px;
 }
 .case-meta {
-  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); /* one column per item (3 or 4) */
   margin: clamp(32px, 4vw, 56px) 0 0; border-block: 1px solid var(--line);
 }
 .case-meta > div { padding: 22px clamp(12px, 2vw, 28px) 26px; border-left: 1px solid var(--line); min-width: 0; }
@@ -24,7 +24,7 @@ figure { margin: 0; }
 .case-meta dt { display: block; }
 .case-meta dd { margin: 10px 0 0; font-size: 16px; }
 @media (max-width: 640px) {
-  .case-meta { grid-template-columns: minmax(0, 1fr); }
+  .case-meta { grid-auto-flow: row; grid-template-columns: minmax(0, 1fr); }
   .case-meta > div { border-left: 0; padding: 16px 0 18px; }
   .case-meta > div + div { border-top: 1px solid var(--line); }
 }
