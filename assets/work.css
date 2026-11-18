@@ -91,3 +91,8 @@
 .work-stats { display: flex; gap: clamp(28px, 3.2vw, 48px); margin: 24px 0 0; }
 .work-stats dt { font-size: clamp(1.5rem, 2.2vw, 2rem); line-height: 1; letter-spacing: -0.02em; color: var(--fg); }
 .work-stats dd { margin: 6px 0 0; font-size: 13px; color: var(--muted); }
+/* tablet and phone: the case title stays larger than its figures, as on desktop */
+@media (max-width: 900px) {
+  .works.stack .work .meta b { font-size: 1.875rem; font-weight: 400; }
+  .work-stats dt { font-size: 1.25rem; }
+}
