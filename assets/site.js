@@ -401,6 +401,21 @@
     });
   })();
 
+  // home headline: clicking the pair of tool icons swaps their places and turns Claude into Codex (and back)
+  (function () {
+    var pair = document.querySelector('.h-tools');
+    if (!pair) return;
+    var swap = pair.querySelector('.h-swap');
+    function toggle() {
+      pair.classList.toggle('is-swapped');
+      if (swap) swap.classList.toggle('is-codex');
+    }
+    pair.addEventListener('click', toggle);
+    pair.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+    });
+  })();
+
   // reveal on scroll
   var items = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window) {
