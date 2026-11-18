@@ -70,7 +70,7 @@ html.enter .h-badge { opacity: 0; transform: scale(.4); }
 }
 .facts > div { padding: clamp(18px, 2.4vw, 28px) clamp(16px, 2.4vw, 32px) 0 0; }
 .facts > div + div { padding-left: clamp(16px, 2.4vw, 32px); border-left: 1px solid var(--line); }
-.facts dt { font-size: clamp(2.25rem, 4vw, 3.5rem); line-height: 1; letter-spacing: -0.03em; }
+.facts dt { font-size: clamp(2.25rem, 4vw, 3.5rem); line-height: 1; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; } /* digits keep their width while counting */
 .facts dd { margin: 10px 0 0; max-width: 18em; font-size: 15px; line-height: 1.45; color: var(--muted); }
 @media (max-width: 760px) {
   .facts { grid-template-columns: minmax(0, 1fr); }
@@ -150,11 +150,11 @@ a.q-tag:hover { color: var(--fg); border-color: var(--fg); }
     <div class="wrap hero" data-enter>
       <h1>Senior <span class="h-avatar w" style="--d: 30ms"><img src="assets/anton.webp" alt="Anton Shmatko" width="320" height="320"><svg class="h-badge" viewBox="0 0 24 24" aria-hidden="true"><path fill="#2F7CF6" d="M21.60 12.00Q23.68 15.13 20.31 16.80Q20.55 20.55 16.80 20.31Q15.13 23.68 12.00 21.60Q8.87 23.68 7.20 20.31Q3.45 20.55 3.69 16.80Q0.32 15.13 2.40 12.00Q0.32 8.87 3.69 7.20Q3.45 3.45 7.20 3.69Q8.87 0.32 12.00 2.40Q15.13 0.32 16.80 3.69Q20.55 3.45 20.31 7.20Q23.68 8.87 21.60 12.00Z"/><path d="M8 12.3l2.6 2.6 5.4-5.6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Product Designer. Designing clear, scalable experiences <span class="h-tools w" style="--d: 330ms" role="button" tabindex="0" aria-label="Made with Claude, Codex and Figma — swap the icons"><span class="h-swap"><img src="assets/icons/app-claude.svg" alt="" width="64" height="64"><img src="assets/icons/app-codex.svg" alt="" width="64" height="64"></span><img src="assets/icons/app-figma.svg" alt="" width="64" height="64"></span> for complex SaaS, AI and Web3 products</h1>
 
-      <!-- impact in numbers -->
-      <dl class="facts">
-        <div><dt>$20M+</dt><dd>raised by the startups I’ve designed products for</dd></div>
-        <div><dt>10×</dt><dd>sign-up conversion on products I redesigned</dd></div>
-        <div><dt>9+</dt><dd>years designing web &amp; mobile products for SaaS, AI and Web3</dd></div>
+      <!-- impact in numbers: they come in last and count up to their values (site.js) -->
+      <dl class="facts" data-enter-at="1500" data-enter-hold="1400">
+        <div><dt data-count="20" data-prefix="$" data-suffix="M+">$20M+</dt><dd>raised by the startups I’ve designed products for</dd></div>
+        <div><dt data-count="10" data-suffix="×">10×</dt><dd>sign-up conversion on products I redesigned</dd></div>
+        <div><dt data-count="9" data-suffix="+">9+</dt><dd>years designing web &amp; mobile products for SaaS, AI and Web3</dd></div>
       </dl>
     </div>
 

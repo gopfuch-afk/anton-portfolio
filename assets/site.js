@@ -416,6 +416,30 @@
     });
   })();
 
+  // numbers that count up ([data-count]): once their block comes in with the entrance (.on), each runs
+  // from 0 to its value; without the entrance (reduced motion) they simply stay as written
+  (function () {
+    var nums = document.querySelectorAll('[data-count]');
+    if (!nums.length || !document.documentElement.classList.contains('enter')) return;
+    nums.forEach(function (el) {
+      var to = +el.getAttribute('data-count'), pre = el.getAttribute('data-prefix') || '', post = el.getAttribute('data-suffix') || '';
+      var box = el.closest('[data-enter] > *') || el;
+      el.textContent = pre + 0 + post;
+      function run() {
+        var start = null, dur = 1400;
+        (function step(now) {
+          if (start === null) start = now;
+          var p = Math.min(1, (now - start) / dur), e = 1 - Math.pow(1 - p, 3);
+          el.textContent = pre + Math.round(to * e) + post;
+          if (p < 1) requestAnimationFrame(step);
+        })(performance.now());
+      }
+      if (box.classList.contains('on')) return run();
+      var mo = new MutationObserver(function () { if (box.classList.contains('on')) { mo.disconnect(); setTimeout(run, 150); } });
+      mo.observe(box, { attributes: true, attributeFilter: ['class'] });
+    });
+  })();
+
   // reveal on scroll
   var items = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window) {
