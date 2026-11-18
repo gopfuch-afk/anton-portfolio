@@ -416,40 +416,33 @@
     });
   })();
 
-  // home headline role: "Product Designer." <-> "Design Engineer." once the entrance is over. "Product"
-  // folds away (or back) so "Design" slides along, and the ending is erased and typed out with a caret.
-  // The role keeps the width of the longer title, so the rest of the headline never reflows.
+  // home headline role: "Product Designer." <-> "Design Engineer." once the entrance is over. The whole
+  // title is erased and the other one typed out letter by letter with a caret. The role keeps the width
+  // of the longer title, so the rest of the headline never reflows.
   (function () {
     var role = document.querySelector('.h-role'), root = document.documentElement;
     if (!role || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var titles = ['Product Designer.', 'Design Engineer.'];
     function start() {
-      role.innerHTML = '<span class="r-pre">Product </span>Design<span class="r-post">er</span><i class="r-caret" aria-hidden="true"></i>.';
+      role.innerHTML = '<span class="r-text">' + titles[0] + '</span><i class="r-caret" aria-hidden="true"></i>';
       role.setAttribute('aria-label', 'Product Designer and Design Engineer');
-      var pre = role.querySelector('.r-pre'), post = role.querySelector('.r-post');
-      var fs = parseFloat(getComputedStyle(role).fontSize);
-      var preW = pre.getBoundingClientRect().width / fs;
-      role.style.minWidth = role.getBoundingClientRect().width / fs + 'em';
-      pre.style.width = preW + 'em';
-      var engineer = false;
+      var text = role.querySelector('.r-text'), now = 0;
+      role.style.minWidth = role.getBoundingClientRect().width / parseFloat(getComputedStyle(role).fontSize) + 'em';
       function erase(done) {
-        if (!post.textContent) return setTimeout(done, 120);
-        post.textContent = post.textContent.slice(0, -1); setTimeout(function () { erase(done); }, 55);
+        if (!text.textContent) return setTimeout(done, 300);
+        text.textContent = text.textContent.slice(0, -1); setTimeout(function () { erase(done); }, 45);
       }
-      function type(text, done) {
-        if (post.textContent === text) return done();
-        post.textContent = text.slice(0, post.textContent.length + 1); setTimeout(function () { type(text, done); }, 85);
+      function type(t, done) {
+        if (text.textContent === t) return done();
+        text.textContent = t.slice(0, text.textContent.length + 1); setTimeout(function () { type(t, done); }, 80);
       }
       function cycle() {
         role.classList.add('is-typing');
-        engineer = !engineer;
+        now = 1 - now;
         erase(function () {
-          pre.style.width = engineer ? '0' : preW + 'em';
-          pre.style.opacity = engineer ? '0' : '1';
-          setTimeout(function () {
-            type(engineer ? ' Engineer' : 'er', function () {
-              setTimeout(function () { role.classList.remove('is-typing'); setTimeout(cycle, 3600); }, 700);
-            });
-          }, 650);
+          type(titles[now], function () {
+            setTimeout(function () { role.classList.remove('is-typing'); setTimeout(cycle, 3600); }, 900);
+          });
         });
       }
       setTimeout(cycle, 2600);

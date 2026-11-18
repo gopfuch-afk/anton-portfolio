@@ -41,10 +41,8 @@
 .h-tools { display: inline-flex; align-items: center; margin: 0 .04em; vertical-align: -.14em; cursor: pointer; -webkit-tap-highlight-color: transparent; }
 /* the headline entrance makes each word inline-block (site.css); the pair must stay a row meanwhile */
 html.enter [data-enter] > h1 .h-tools.w { display: inline-flex; }
-/* the role after the photo turns "Product Designer." into "Design Engineer." and back (site.js): "Product"
-   folds away so "Design" slides into its place, and the ending is erased and typed with a caret */
+/* the role after the photo is erased and typed out as "Design Engineer." and back (site.js) */
 .h-role { display: inline-block; white-space: nowrap; text-align: left; }
-.h-role .r-pre { display: inline-block; overflow: hidden; vertical-align: bottom; transition: width .6s cubic-bezier(.65, 0, .35, 1), opacity .4s ease; }
 .h-role .r-caret { display: inline-block; width: .05em; height: .82em; margin: 0 -.05em 0 0; vertical-align: -.06em; background: currentColor; opacity: 0; }
 .h-role.is-typing .r-caret { opacity: 1; animation: r-blink 1s steps(1) infinite; }
 @keyframes r-blink { 50% { opacity: 0; } }
