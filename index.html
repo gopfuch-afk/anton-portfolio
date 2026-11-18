@@ -27,14 +27,34 @@
 <style>
 /* hero */
 .hero { padding-block: clamp(32px, 6vw, 72px) clamp(56px, 8vw, 120px); }
-.hero-name {
-  margin-bottom: clamp(16px, 2vw, 24px);
-  font-size: clamp(17px, 1.5vw, 21px); font-weight: 500; letter-spacing: -0.01em; text-transform: none; color: var(--fg);
-}
 .hero h1 {
   font-size: clamp(2.6rem, 6.4vw, 5.76rem);
   line-height: 1; letter-spacing: -0.04em; max-width: 13.5em;
 }
+/* a round photo inside the headline, with a verified badge; it comes in with the words (class w) */
+.h-avatar { position: relative; display: inline-block; width: 1.12em; height: 1.12em; margin: 0 .02em; vertical-align: -.23em; }
+/* the photo is cut out; a soft tone of the text colour fills the circle behind it */
+.h-avatar img { display: block; width: 100%; height: 100%; border-radius: 50%; object-fit: cover; background: color-mix(in srgb, var(--fg) 3%, var(--bg)); /* barely grey */
+  box-shadow: 0 0 0 .05em color-mix(in srgb, var(--fg) 8%, transparent); /* a light, see-through grey ring */ }
+/* the tools (Claude, Figma), as a fanned pair of app icons in the headline; they line up on hover */
+.h-tools { display: inline-flex; align-items: center; margin: 0 .04em; vertical-align: -.14em; }
+/* the headline entrance makes each word inline-block (site.css); the pair must stay a row meanwhile */
+html.enter [data-enter] > h1 .h-tools.w { display: inline-flex; }
+.h-tools img {
+  display: block; width: .86em; height: .86em; border-radius: .2em;
+  transform: rotate(var(--r)); transition: transform .4s cubic-bezier(.34, 1.56, .64, 1);
+}
+.h-tools img + img { margin-left: -.08em; }
+.h-tools img:nth-child(1) { --r: -10deg; }
+.h-tools img:nth-child(2) { --r: 6deg; }
+.h-tools:hover img { transform: translateX(calc(var(--i) * .1em)) rotate(0deg); }
+.h-tools img { --i: 0; } .h-tools img:nth-child(2) { --i: 1; }
+/* the verified badge pops in last: 2.5 s after the whole hero has come in (html.enter is dropped, site.js) */
+.h-badge {
+  position: absolute; right: -.04em; bottom: 0; width: .32em; height: .32em;
+  transition: opacity .25s ease 2.5s, transform .45s cubic-bezier(.34, 1.56, .64, 1) 2.5s;
+}
+html.enter .h-badge { opacity: 0; transform: scale(.4); }
 .facts {
   display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: 28px clamp(40px, 6vw, 96px);
   margin-top: clamp(40px, 6vw, 80px);
@@ -114,8 +134,7 @@ a.q-tag:hover { color: var(--fg); border-color: var(--fg); }
 
   <main id="top">
     <div class="wrap hero" data-enter>
-      <p class="label hero-name">Hi, I’m Anton Shmatko</p>
-      <h1>Senior Product Designer. Designing clear, scalable experiences for complex SaaS, AI and Web3 products</h1>
+      <h1>Senior <span class="h-avatar w" style="--d: 30ms"><img src="assets/anton.webp" alt="Anton Shmatko" width="320" height="320"><svg class="h-badge" viewBox="0 0 24 24" aria-hidden="true"><path fill="#2F7CF6" d="M21.60 12.00Q23.68 15.13 20.31 16.80Q20.55 20.55 16.80 20.31Q15.13 23.68 12.00 21.60Q8.87 23.68 7.20 20.31Q3.45 20.55 3.69 16.80Q0.32 15.13 2.40 12.00Q0.32 8.87 3.69 7.20Q3.45 3.45 7.20 3.69Q8.87 0.32 12.00 2.40Q15.13 0.32 16.80 3.69Q20.55 3.45 20.31 7.20Q23.68 8.87 21.60 12.00Z"/><path d="M8 12.3l2.6 2.6 5.4-5.6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Product Designer. Designing clear, scalable experiences <span class="h-tools w" style="--d: 330ms" role="img" aria-label="Made with Claude and Figma"><img src="assets/icons/app-claude.svg" alt="" width="64" height="64"><img src="assets/icons/app-figma.svg" alt="" width="64" height="64"></span> for complex SaaS, AI and Web3 products</h1>
 
       <div class="facts">
         <div><span class="label">Domains</span><p>SaaS, AI, Web3, Marketplaces, Enterprise</p></div>
