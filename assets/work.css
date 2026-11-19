@@ -16,6 +16,7 @@
   .works .col:nth-child(1) .work:nth-child(4) { order: 7; }
   .works .col:nth-child(2) .work:nth-child(4) { order: 8; }
   .works .col:nth-child(1) .work:nth-child(5) { order: 9; }
+  .works .col:nth-child(2) .work:nth-child(5) { order: 10; }
 }
 .work { text-decoration: none; display: block; }
 .work .media {
@@ -74,6 +75,7 @@
   .works.stack .col:nth-child(2) .work:nth-child(1) { order: 2; }
   .works.stack .col:nth-child(1) .work:nth-child(2) { order: 3; }
   .works.stack .col:nth-child(2) .work:nth-child(2) { order: 4; }
+  .works.stack .col:nth-child(2) .work:nth-child(3) { order: 6; }
   .works.stack .work {
     display: grid; grid-template-columns: min(62%, calc((100vh - 140px) * 4 / 3)) minmax(0, 1fr);
     gap: clamp(32px, 5vw, 80px); align-items: center; min-height: calc(100vh - 72px);
@@ -86,6 +88,13 @@
   .works.stack .work p { margin-top: 16px; }
   .works.stack .work .work-cta { margin-top: 24px; }
 }
+
+/* a case without its page yet: a quiet label where "View case study" would be */
+.work.is-soon { cursor: default; }
+.work-soon { display: inline-flex; align-items: center; gap: 10px; margin-top: 24px; padding: 8px 14px; border: 1px solid var(--line, rgb(127 127 127 / .25)); border-radius: 999px; font-size: 13px; color: var(--muted); }
+.work-soon::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #F59E0B; animation: soon-pulse 1.8s ease-in-out infinite; }
+@keyframes soon-pulse { 50% { opacity: .3; } }
+@media (prefers-reduced-motion: reduce) { .work-soon::before { animation: none; } }
 
 /* a case's results under its description (home): a figure over a short caption */
 .work-stats { display: flex; gap: clamp(28px, 3.2vw, 48px); margin: 24px 0 0; }
