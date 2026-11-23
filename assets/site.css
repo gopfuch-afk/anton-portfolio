@@ -286,7 +286,7 @@ html.enter header.top .on, html.enter [data-enter] > .on, html.enter [data-enter
 
 /* About: the tools behind the site under the headline; on load they pop in one by one once the heading
    has settled (data-enter-at in about.html), and the rest of the page follows */
-.made-with { display: flex; align-items: center; gap: 10px; margin-top: clamp(24px, 3vw, 36px); }
+.made-with { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: clamp(24px, 3vw, 36px); }
 /* each logo sits small in an outlined circle; on hover it takes its brand colour and shows its name */
 .tool { position: relative; display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 50%; box-sizing: border-box; }
 .tool i {
@@ -325,4 +325,7 @@ html.enter .made-with .tool:nth-child(3) { transition-delay: .24s; }
 html.enter .made-with .tool:nth-child(4) { transition-delay: .36s; }
 html.enter .made-with .tool:nth-child(5) { transition-delay: .48s; }
 html.enter .made-with .tool:nth-child(6) { transition-delay: .6s; }
+html.enter .made-with .tool:nth-child(7) { transition-delay: .72s; }
+html.enter .made-with .tool:nth-child(8) { transition-delay: .84s; }
+html.enter .made-with .tool:nth-child(9) { transition-delay: .96s; }
 html.enter .made-with.on .tool { opacity: 1; transform: none; }
