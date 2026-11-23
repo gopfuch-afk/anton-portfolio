@@ -161,7 +161,7 @@ html.preload .pl { position: fixed; inset: 0; z-index: 1000; display: grid; plac
   if (!root.classList.contains('preload')) { pl.remove(); return; }
   var srcs = ["01.jpg","02.jpg","03.jpg","04.jpg","05.jpg","06.jpg","07.jpg","08.jpg","09.jpg","10.jpg","11.jpg","12.jpg","13.jpg","14.jpg","15.jpg","16.jpg","17.jpg","18.jpg","19.jpg","20.jpg","21.jpg","22.jpg","23.jpg"];
   var N = 36, R = 230, ring = pl.querySelector('.pl-ring'), stage = pl.querySelector('.pl-stage');
-  stage.style.setProperty('--k', Math.min(1.82, innerWidth / 760).toFixed(3));
+  stage.style.setProperty('--k', (innerWidth / 560).toFixed(3));
   var cards = [];
   for (var i = 0; i < N; i++) {
     var c = document.createElement('div'); c.className = 'pl-card';
