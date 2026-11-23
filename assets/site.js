@@ -156,9 +156,10 @@
   var enterUntil = 0; // when the entrance finishes; scroll reveals already in view wait for it
   // entrance on load: header items, then the top block of the page ([data-enter] children) one after
   // another; the main heading comes in word by word. Hidden by CSS only while html has .enter
-  (function () {
+  (function entrance() {
     var root = document.documentElement;
     if (!root.classList.contains('enter')) return;
+    if (window.__afterPreload) { window.__afterPreload.push(entrance); return; } // the home preloader runs first
     var seq = [], t = 120;
     // the logo shows at once (it writes itself); the menu comes in from the right: Say hello, theme, About, Work
     var id = document.querySelector('header.top .id');
