@@ -324,4 +324,5 @@ html.enter .made-with .tool:nth-child(2) { transition-delay: .12s; }
 html.enter .made-with .tool:nth-child(3) { transition-delay: .24s; }
 html.enter .made-with .tool:nth-child(4) { transition-delay: .36s; }
 html.enter .made-with .tool:nth-child(5) { transition-delay: .48s; }
+html.enter .made-with .tool:nth-child(6) { transition-delay: .6s; }
 html.enter .made-with.on .tool { opacity: 1; transform: none; }
