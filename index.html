@@ -6,7 +6,7 @@
 <meta name="description" content="Anton Shmatko — Senior Product Designer with 9 years of experience in SaaS, AI, Web3, marketplaces and enterprise platforms.">
 <title>Anton Shmatko — Senior Product Designer</title>
 <script>var d=document.documentElement;try{localStorage.removeItem('theme');if(sessionStorage.getItem('theme')!=='dark')d.setAttribute('data-theme','light')}catch(e){d.setAttribute('data-theme','light')}</script>
-<script>(function(){var d=document.documentElement,pl=false;if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;d.classList.add('enter');try{pl=!sessionStorage.getItem('pl')}catch(e){}if(pl){d.classList.add('preload');window.__afterPreload=[]}setTimeout(function(){d.classList.remove('enter','preload')},pl?10000:5000)})()</script>
+<script>if(!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('enter');setTimeout(function(){document.documentElement.classList.remove('enter')},5000)}</script>
 <link rel="canonical" href="https://www.antonshmatko.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Anton Shmatko">
@@ -134,111 +134,9 @@ a.q-tag:hover { color: var(--fg); border-color: var(--fg); }
 @media (prefers-reduced-motion: reduce) {
   .quote.is-active { animation: none; }
 }
-
-/* preloader (first visit in a tab): the cases as a stack of folders held in the air, flipped through one by one */
-.pl { display: none; }
-html.preload, html.preload body { overflow: hidden; }
-html.preload .pl { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; background: var(--bg); }
-.pl-stage { position: relative; width: min(62vw, 400px); aspect-ratio: 4 / 3; perspective: 1300px; }
-.pl-stack { position: absolute; inset: 0; transform-style: preserve-3d; transform: rotateX(16deg) rotateZ(-2deg); }
-.pl-card {
-  position: absolute; inset: 0; padding: 8px; border-radius: 12px; background: var(--c);
-  box-shadow: 0 34px 60px -24px rgb(0 0 0 / .45), inset 0 1px 0 rgb(255 255 255 / .18); will-change: transform; opacity: 0;
-}
-.pl-card::before { /* the folder tab with the case name */
-  content: attr(data-name); position: absolute; left: calc(var(--i) * (100% - 96px) / 4); bottom: calc(100% - 1px); height: 26px; padding: 0 14px;
-  display: flex; align-items: center; border-radius: 10px 10px 0 0; background: var(--c);
-  color: #fff; font-size: 12px; letter-spacing: .01em; white-space: nowrap;
-}
-.pl-card img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 6px; }
-.pl-meta { position: absolute; left: 0; right: 0; top: calc(100% + 56px); display: flex; justify-content: space-between; font-size: 13px; color: var(--muted); }
-.pl-meta b { font-weight: 400; color: var(--fg); }
-.pl-bar { position: absolute; left: 0; right: 0; top: calc(100% + 84px); height: 1px; background: var(--line); overflow: hidden; }
-.pl-bar i { display: block; height: 100%; background: var(--fg); transform-origin: left; transform: scaleX(0); }
 </style>
 </head>
 <body>
-<div class="pl" aria-hidden="true">
-  <div class="pl-stage">
-    <div class="pl-stack">
-      <div class="pl-card" data-name="Lumi AI" style="--c: #2347F5; --i: 0"><img src="media/lumi-ai/cover.jpg" alt=""></div>
-      <div class="pl-card" data-name="Aurbitrage" style="--c: #B45309; --i: 1"><img src="media/aurbitrage/card.jpg" alt=""></div>
-      <div class="pl-card" data-name="Furbnow" style="--c: #166534; --i: 2"><img src="media/furbnow/cover.jpg" alt=""></div>
-      <div class="pl-card" data-name="Mava AI" style="--c: #6D28D9; --i: 3"><img src="media/mava-ai/card.jpg" alt=""></div>
-      <div class="pl-card" data-name="Muso AI" style="--c: #E0603F; --i: 4"><img src="media/muso-ai/card.webp" alt=""></div>
-    </div>
-    <div class="pl-meta"><b>Lumi AI</b><span>01 / 05</span></div>
-    <div class="pl-bar"><i></i></div>
-  </div>
-</div>
-<script>
-// Preloader: the folders fly in from below into a stack, then the top one is lifted, swung over the
-// stack and dropped at the back, one after another, until the first case is on top again. The whole
-// stack then flies off and the page entrance (site.js) starts.
-(function () {
-  var root = document.documentElement, pl = document.querySelector('.pl');
-  if (!root.classList.contains('preload')) { pl.remove(); return; }
-  var cards = [].slice.call(pl.querySelectorAll('.pl-card')), n = cards.length;
-  var stack = pl.querySelector('.pl-stack'), name = pl.querySelector('.pl-meta b'), num = pl.querySelector('.pl-meta span');
-  var tilt = [-1, 2.5, -3, 1.5, -2];
-  function slot(d, i) { // d: 0 is the top of the stack
-    return 'translate3d(' + d * 7 + 'px,' + d * -22 + 'px,' + d * -46 + 'px) rotateZ(' + tilt[i] + 'deg)';
-  }
-  var order = cards.map(function (_, i) { return i; }); // card index at each depth
-  var EASE = 'cubic-bezier(.65,0,.35,1)', FLIP = 540, flips = n;
-  function go() {
-    // fly in: the back folders first, the top one last
-    order.slice().reverse().forEach(function (ci, k) {
-      var d = order.indexOf(ci);
-      cards[ci].animate([
-        { opacity: 0, transform: 'translate3d(0,70vh,0) rotateX(-40deg) rotateZ(' + (d % 2 ? 14 : -14) + 'deg)' },
-        { opacity: 1, transform: slot(d, ci) }
-      ], { duration: 750, delay: k * 90, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'forwards' });
-    });
-    var t0 = 750 + (n - 1) * 90 + 150, total = t0 + flips * FLIP + 250 + 650;
-    pl.querySelector('.pl-bar i').animate([{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }], { duration: total - 650, easing: 'linear', fill: 'forwards' });
-    for (var f = 0; f <= flips; f++) setTimeout(flip, t0 + f * FLIP, f === flips);
-    function flip(last) {
-      if (last) return outro();
-      var top = order.shift(); order.push(top);
-      cards[top].animate([
-        { transform: slot(0, top) },
-        { transform: 'translate3d(-14px,-62%,90px) rotateX(-16deg) rotateZ(-9deg)', offset: .38 },
-        { transform: 'translate3d(24px,-92%,-260px) rotateX(12deg) rotateZ(7deg)', offset: .7 },
-        { transform: slot(n - 1, top) }
-      ], { duration: FLIP, easing: EASE, fill: 'forwards' });
-      order.forEach(function (ci, d) {
-        if (ci === top) return;
-        cards[ci].animate([{ transform: slot(d + 1, ci) }, { transform: slot(d, ci) }], { duration: FLIP * .8, delay: FLIP * .2, easing: EASE, fill: 'forwards' });
-      });
-      setTimeout(function () {
-        name.textContent = cards[order[0]].getAttribute('data-name');
-        num.textContent = '0' + (order[0] + 1) + ' / 0' + n;
-      }, FLIP * .45);
-    }
-    function outro() {
-      setTimeout(function () {
-        stack.animate([{ transform: 'rotateX(16deg) rotateZ(-2deg)', opacity: 1 }, { transform: 'translate3d(0,-60vh,-300px) rotateX(40deg) rotateZ(6deg)', opacity: 0 }],
-          { duration: 650, easing: 'cubic-bezier(.5,0,.75,0)', fill: 'forwards' });
-        pl.querySelector('.pl-meta').animate([{ opacity: 1 }, { opacity: 0 }], { duration: 300, fill: 'forwards' });
-        pl.querySelector('.pl-bar').animate([{ opacity: 1 }, { opacity: 0 }], { duration: 300, fill: 'forwards' });
-        pl.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 450, delay: 300, easing: 'ease', fill: 'forwards' }).onfinish = done;
-      }, 250);
-    }
-  }
-  function done() {
-    try { sessionStorage.setItem('pl', '1'); } catch (e) {}
-    pl.remove(); root.classList.remove('preload');
-    var q = window.__afterPreload || []; window.__afterPreload = null;
-    q.forEach(function (fn) { fn(); });
-  }
-  // start once the folder images are in (or after 1.5 s at most)
-  var imgs = [].slice.call(pl.querySelectorAll('img')), left = imgs.length, started = false;
-  function start() { if (!started) { started = true; go(); } }
-  imgs.forEach(function (im) { if (im.complete) { if (!--left) start(); } else im.onload = im.onerror = function () { if (!--left) start(); }; });
-  setTimeout(start, 1500);
-})();
-</script>
 <canvas id="stars" aria-hidden="true"></canvas>
 
 <div class="page">
