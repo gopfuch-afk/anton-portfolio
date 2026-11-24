@@ -60,8 +60,9 @@ html.enter [data-enter] > h1 .h-tools.w { display: inline-flex; }
 .h-tools.is-swapped:hover > * { --r: 0deg; }
 .h-swap { position: relative; }
 .h-swap img { position: absolute; inset: 0; width: 100%; height: 100%; transition: opacity .3s ease, transform .45s cubic-bezier(.34, 1.56, .64, 1); }
-.h-swap img + img, .h-swap.is-codex img:first-child { opacity: 0; transform: scale(.55) rotate(-25deg); }
-.h-swap.is-codex img + img { opacity: 1; transform: none; }
+/* a click turns Claude and Figma into Lottie and After Effects and back (.is-motion, site.js) */
+.h-swap img + img, .h-tools.is-motion .h-swap img:not(.h-m) { opacity: 0; transform: scale(.55) rotate(-25deg); }
+.h-tools.is-motion .h-swap img.h-m { opacity: 1; transform: none; }
 /* the verified badge pops in last: 2.5 s after the whole hero has come in (html.enter is dropped, site.js) */
 .h-badge {
   position: absolute; right: -.04em; bottom: 0; width: .32em; height: .32em;
@@ -153,7 +154,7 @@ a.q-tag:hover { color: var(--fg); border-color: var(--fg); }
 
   <main id="top">
     <div class="wrap hero" data-enter>
-      <h1>Senior <span class="h-avatar w" style="--d: 30ms"><img src="assets/anton.webp" alt="Anton Shmatko" width="320" height="320"><svg class="h-badge" viewBox="0 0 24 24" aria-hidden="true"><path fill="#2F7CF6" d="M21.60 12.00Q23.68 15.13 20.31 16.80Q20.55 20.55 16.80 20.31Q15.13 23.68 12.00 21.60Q8.87 23.68 7.20 20.31Q3.45 20.55 3.69 16.80Q0.32 15.13 2.40 12.00Q0.32 8.87 3.69 7.20Q3.45 3.45 7.20 3.69Q8.87 0.32 12.00 2.40Q15.13 0.32 16.80 3.69Q20.55 3.45 20.31 7.20Q23.68 8.87 21.60 12.00Z"/><path d="M8 12.3l2.6 2.6 5.4-5.6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span> <span class="h-role">Product Designer.</span> Designing clear, scalable experiences <span class="h-tools w" style="--d: 330ms" role="button" tabindex="0" aria-label="Made with Claude, Codex and Figma — swap the icons"><span class="h-swap"><img src="assets/icons/app-claude.svg" alt="" width="64" height="64"><img src="assets/icons/app-codex.svg" alt="" width="64" height="64"></span><img src="assets/icons/app-figma.svg" alt="" width="64" height="64"></span> for complex SaaS, AI and Web3 products.</h1>
+      <h1>Senior <span class="h-avatar w" style="--d: 30ms"><img src="assets/anton.webp" alt="Anton Shmatko" width="320" height="320"><svg class="h-badge" viewBox="0 0 24 24" aria-hidden="true"><path fill="#2F7CF6" d="M21.60 12.00Q23.68 15.13 20.31 16.80Q20.55 20.55 16.80 20.31Q15.13 23.68 12.00 21.60Q8.87 23.68 7.20 20.31Q3.45 20.55 3.69 16.80Q0.32 15.13 2.40 12.00Q0.32 8.87 3.69 7.20Q3.45 3.45 7.20 3.69Q8.87 0.32 12.00 2.40Q15.13 0.32 16.80 3.69Q20.55 3.45 20.31 7.20Q23.68 8.87 21.60 12.00Z"/><path d="M8 12.3l2.6 2.6 5.4-5.6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span> <span class="h-role">Product Designer.</span> Designing clear, scalable experiences <span class="h-tools w" style="--d: 330ms" role="button" tabindex="0" aria-label="Made with Claude and Figma, or Lottie and After Effects — swap the icons"><span class="h-swap"><img src="assets/icons/app-claude.svg" alt="" width="64" height="64"><img class="h-m" src="assets/icons/app-lottie.svg" alt="" width="64" height="64"></span><span class="h-swap"><img src="assets/icons/app-figma.svg" alt="" width="64" height="64"><img class="h-m" src="assets/icons/app-aftereffects.svg" alt="" width="64" height="64"></span></span> for complex SaaS, AI and Web3 products.</h1>
 
       <!-- impact in numbers: they come in last and count up to their values (site.js) -->
       <dl class="facts" data-enter-at="1500" data-enter-hold="1400">

@@ -401,14 +401,13 @@
     });
   })();
 
-  // home headline: clicking the pair of tool icons swaps their places and turns Claude into Codex (and back)
+  // home headline: clicking the pair of tool icons swaps their places and turns Claude and Figma into Lottie and After Effects (and back)
   (function () {
     var pair = document.querySelector('.h-tools');
     if (!pair) return;
-    var swap = pair.querySelector('.h-swap');
     function toggle() {
       pair.classList.toggle('is-swapped');
-      if (swap) swap.classList.toggle('is-codex');
+      pair.classList.toggle('is-motion');
     }
     pair.addEventListener('click', toggle);
     pair.addEventListener('keydown', function (e) {
