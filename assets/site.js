@@ -416,16 +416,16 @@
     });
   })();
 
-  // home headline role: "Product Designer." <-> "Design Engineer." once the entrance is over. The whole
-  // title is erased and the other one typed out letter by letter with a caret. The role keeps the width
+  // home headline role: "Product Designer." -> "Design Engineer." -> "Motion Designer." in turn once the entrance is over. The whole
+  // title is erased and the next one typed out letter by letter with a caret. The role keeps the width
   // of the longer title, so the rest of the headline never reflows.
   (function () {
     var role = document.querySelector('.h-role'), root = document.documentElement;
     if (!role || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    var titles = ['Product Designer.', 'Design Engineer.'];
+    var titles = ['Product Designer.', 'Design Engineer.', 'Motion Designer.'];
     function start() {
       role.innerHTML = '<span class="r-text">' + titles[0] + '</span><i class="r-caret" aria-hidden="true"></i>';
-      role.setAttribute('aria-label', 'Product Designer and Design Engineer');
+      role.setAttribute('aria-label', 'Product Designer, Design Engineer and Motion Designer');
       var text = role.querySelector('.r-text'), now = 0;
       role.style.minWidth = role.getBoundingClientRect().width / parseFloat(getComputedStyle(role).fontSize) + 'em';
       function erase(done) {
@@ -438,7 +438,7 @@
       }
       function cycle() {
         role.classList.add('is-typing');
-        now = 1 - now;
+        now = (now + 1) % titles.length;
         erase(function () {
           type(titles[now], function () {
             setTimeout(function () { role.classList.remove('is-typing'); setTimeout(cycle, 3600); }, 900);
